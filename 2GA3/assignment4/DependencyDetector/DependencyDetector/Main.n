@@ -15,9 +15,10 @@ module Program
       {
           def result = regexp match(line)
           {
-              | "[^ ]* (?:<intruction1>[^ ]*)" => instruction1;
+              | "[^ ]* (?<reg1>[^ ]*)" => reg1;
               | _ => "";
           }
+          Console.WriteLine(result);
       }
     WriteLine("Hi!");
     _ = ReadLine();
