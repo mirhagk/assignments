@@ -1,37 +1,79 @@
 \newcommand{\code}{\texttt}
 
-\documentclass[style=paintings]{powerdot}
-% Presentation metadata
-\title{RCImmix Algorithm}
-\author{Nathan Jervis}
-% \date{8th November 2010}
+\documentclass{beamer}
+%\usetheme{default}
+%\usetheme{Boadilla}
+%\usetheme{Madrid}
+\usetheme{Pittsburgh}
+%\usetheme{Rochester}
+%\usetheme{Copenhagen}
+%\usetheme{Warsaw}
+%\usetheme{Singapore}
+%\usetheme{Malmoe}
+%\usecolortheme{albatross}
+
+\usepackage{listings}
+
+\title[RCImmix]{A Description of the RCImmix Algorithm}
+\subtitle[RC]{Reference Counting with better heap allocation}
+\author[N. Jervis]{Nathan Jervis}
+\institute[McMaster]{
+  Department of Computer Science\\
+  McMaster University, Hamilton\\
+  \texttt{jervisnd@mcmaster.ca}
+}
+
 
 \begin{document}
 
-	% title slide
-	\maketitle
 
-	% section: title takes up full slide
-	\section{RCImmix Algorithm}
+%--- the titlepage frame -------------------------%
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
 
-	% text slide:
-	\begin{slide}{Memory Management}
-		\begin{itemize}
-			\item Manual (\code{alloc} and \code{free})
-			\item Automatic
-			\begin{itemize}
-				\item Garbage Collection
-				\item Reference Counting
-			\end{itemize}
-		\end{itemize}
-	\end{slide}
-	
-	\begin{slide}{Garbage Collection}
-		\begin{itemize}
-			\item test
-			\onslide+{2-}{Pros}
-			\onslide+{3-}{Cons}
-		\end{itemize}
-	\end{slide}
+%--- the presentation begins here ----------------%
+\begin{frame}{Overview}
+	\begin{itemize}
+		\item Introduction to automatic memory management
+		\item Problems with existing reference counting
+		\item The RCImmix algorithm
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Memory Management}
+%{Memory Management}[fragile]
+
+
+\begin{lstlisting}[caption=First C example]
+int main()
+{
+    printf("Hello World!");
+    return 0;
+}
+\end{lstlisting}
+
+A displayed formula:
+
+\[
+  \int_{-\infty}^\infty e^{-x^2} \, dx = \sqrt{\pi}
+\]
+
+An itemized list:
+
+\begin{itemize}
+  \item itemized item 1
+  \item itemized item 2
+  \item itemized item 3
+\end{itemize}
+
+\begin{theorem}
+  In a right triangle, the square of hypotenuse equals
+  the sum of squares of two other sides.
+\end{theorem}
+
+\end{frame}
 
 \end{document}

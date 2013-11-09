@@ -1,0 +1,11 @@
+This is C:\Program Files (x86)\MiKTeX 2.9\miktex\bin\makeindex.EXE, version 2.15 [MiKTeX 2.9] (kpathsea + Thai support).
+Scanning input file Assignment4.bm...
+!! Input index error (file = Assignment4.bm, line = 1):
+   -- Unknown index keyword \pdbookmark.
+!! Input index error (file = Assignment4.bm, line = 2):
+   -- Unknown index keyword \pdbookmark.
+!! Input index error (file = Assignment4.bm, line = 3):
+   -- Unknown index keyword \pdbookmark.
+done (0 entries accepted, 3 rejected).
+Nothing written in Assignment4.ind.
+Transcript written in Assignment4.ilg.

@@ -1,3 +1,1 @@
-\pdcontentsline{1}{2}{RCImmix Algorithm}
-\pdcontentsline{0}{3}{Memory Management}
-\pdcontentsline{0}{4}{Garbage Collection}
+\beamer@endinputifotherversion {3.31pt}
