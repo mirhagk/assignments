@@ -41,6 +41,29 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Manual Memory Management}
+	\textbf{Manual Memory Management}
+	\begin{itemize}
+		\item Difficult to use
+		\item Can cause dangling pointers
+		\item Leads to memory leaks
+	\end{itemize}
+	\emph{Much better if the compiler/runtime can manage memory for us}
+\end{frame}
+
+\begin{frame}{Automatic Memory Management}
+	\textbf{Garbage Collection:}
+	\begin{itemize}
+		\item Periodically follow program references
+		\item Collect anything not referred to
+	\end{itemize}
+	\textbf{Reference Counting:}
+	\begin{itemize}
+		\item Counter keeps track of how many things are pointing to it
+		\item When counter reaches 0, free memory
+	\end{itemize}
+\end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{Memory Management}
