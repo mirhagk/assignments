@@ -1,8 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.8)  8 NOV 2013 16:37
+This is XeTeX, Version 3.1415926-2.4-0.9998 (MiKTeX 2.9) (preloaded format=xelatex 2013.11.9)  9 NOV 2013 01:50
 entering extended mode
-**C:/Users/nathan/Documents/GitHub/assignments/2I03/assignment4/Assignment4.tex
-
-(C:/Users/nathan/Documents/GitHub/assignments/2I03/assignment4/Assignment4.tex
+**Assignment4.tex
+(C:\Users\nathan\Documents\GitHub\assignments\2I03\assignment4\Assignment4.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -17,13 +16,13 @@ ishmax, welsh, loaded.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\powerdot\powerdot.cls"
 Document Class: powerdot 2012/03/13 v1.4i powerdot presentation class (HA,CE,hv
 )
-\c@note=\count79
-\c@slide=\count80
-\c@pd@pause=\count81
-\c@pd@section=\count82
-\c@pd@overlay=\count83
-\c@pd@trivlist=\count84
-\c@pd@onslidedepth=\count85
+\c@note=\count80
+\c@slide=\count81
+\c@pd@pause=\count82
+\c@pd@section=\count83
+\c@pd@overlay=\count84
+\c@pd@trivlist=\count85
+\c@pd@onslidedepth=\count86
 \pd@tba=\box26
 \pd@tbb=\box27
 \pd@body=\toks14
@@ -39,7 +38,7 @@ Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
 \XKV@toks=\toks15
 \XKV@tempa@toks=\toks16
-\XKV@depth=\count86
+\XKV@depth=\count87
 File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\keyval.tex")))
@@ -48,27 +47,29 @@ Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size10.clo"
 File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
-\c@part=\count87
-\c@section=\count88
-\c@subsection=\count89
-\c@subsubsection=\count90
-\c@paragraph=\count91
-\c@subparagraph=\count92
-\c@figure=\count93
-\c@table=\count94
+\c@part=\count88
+\c@section=\count89
+\c@subsection=\count90
+\c@subsubsection=\count91
+\c@paragraph=\count92
+\c@subparagraph=\count93
+\c@figure=\count94
+\c@table=\count95
 \abovecaptionskip=\skip45
 \belowcaptionskip=\skip46
 \bibindent=\dimen102
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size11.clo"
 File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+Requested font "cmr10" at 10.95pt
+ -> cmr10
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package ifpdf Info: pdfTeX in PDF mode is not detected.
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
 Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
@@ -77,9 +78,9 @@ Package ifvtex Info: VTeX not detected.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count95
-\Gm@cntv=\count96
-\c@Gm@tempcnt=\count97
+\Gm@cnth=\count96
+\Gm@cntv=\count97
+\c@Gm@tempcnt=\count98
 \Gm@bindingoffset=\dimen103
 \Gm@wd@mp=\dimen104
 \Gm@odd@mp=\dimen105
@@ -90,7 +91,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks17
 
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\xelatex\xetexconfig\geometry.cfg"))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
@@ -118,9 +119,10 @@ Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: pdfTeX >= 1.30 not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
+Package pdftexcmds Info: \pdfdraftmode not found.
 Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
 Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
 )
@@ -144,45 +146,408 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
 \@linkdim=\dimen111
-\Hy@linkcounter=\count98
-\Hy@pagecounter=\count99
+\Hy@linkcounter=\count99
+\Hy@pagecounter=\count100
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@SavedSpaceFactor=\count100
+\Hy@SavedSpaceFactor=\count101
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Option `setpagesize' set `false' on input line 4319.
+Package hyperref Info: Option `pageanchor' set `false' on input line 4319.
+Package hyperref Info: Option `bookmarks' set `false' on input line 4319.
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks OFF on input line 4694.
+\c@Hy@tempcnt=\count102
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\xelatex\xetexurl\url.sty"
+\Urlmuskip=\muskip10
+Package: url 2004/03/15  ver 3.1  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen112
+Requested font "pzdr" at 0.00002pt
+ -> pzdr
+\Fld@menulength=\count103
+\Field@Width=\dimen113
+\Fld@charsize=\dimen114
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count104
+\c@Item=\count105
+\c@Hfootnote=\count106
+)
+
+Package hyperref Message: Driver (autodetected): hxetex.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hxetex.def"
+File: hxetex.def 2012/11/06 v6.83m Hyperref driver for XeTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\puenc.def"
+File: puenc.def 2012/11/06 v6.83m Hyperref: PDF Unicode definition (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\stringenc.sty"
+Package: stringenc 2011/12/02 v1.10 Convert strings between diff. encodings (HO
+)
+)
+\pdfm@box=\box28
+\c@Hy@AnnotLevel=\count107
+\HyField@AnnotCount=\count108
+\Fld@listcount=\count109
+\c@bookmark@seq@number=\count110
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\rerunfilecheck.sty"
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package rerunfilecheck Info: Feature \pdfmdfivesum is not available
+(rerunfilecheck)             (e.g. pdfTeX or LuaTeX with package `pdftexcmds').
+
+(rerunfilecheck)             Therefore file contents cannot be checked efficien
+tly
+(rerunfilecheck)             and the loading of the package is aborted.
+)
+\Hy@SectionHShift=\skip47
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: xetex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\xelatex\xetex-def\xetex.def"
+File: xetex.def 2013/04/29 v0.96 LaTeX color/graphics driver for XeTeX (RRM/JK)
+
+))
+\Gin@req@height=\dimen115
+\Gin@req@width=\dimen116
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pstricks\pstricks.sty"
+Package: pstricks 2012/08/24 v0.53 LaTeX wrapper for `PSTricks' (RN,HV)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pstricks\base\pstricks.tex"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\pst-xkey.tex"
+File: pst-xkey.tex 2005/11/25 v1.6 PSTricks specialization of xkeyval (HA)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pstricks\base\pst-fp.tex"
+`pst-fp' v0.05, 2010/01/17 (hv)
+\pstFP@xs=\count111
+\pstFP@xia=\count112
+\pstFP@xib=\count113
+\pstFP@xfa=\count114
+\pstFP@xfb=\count115
+\pstFP@rega=\count116
+\pstFP@regb=\count117
+\pstFP@regs=\count118
+\pstFP@times=\count119
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfutil-common.te
+x"
+\pgfutil@everybye=\toks18
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeys.code.tex"
+\pgfkeys@pathtoks=\toks19
+\pgfkeys@temptoks=\toks20
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgfkeysfiltered.c
+ode.tex"
+\pgfkeys@tmptoks=\toks21
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pgf\utilities\pgffor.code.tex"
+\pgffor@iter=\dimen117
+\pgffor@skip=\dimen118
+\pgffor@stack=\toks22
+\pgffor@toks=\toks23
+)
+\psLoopIndex=\count120
+`PSTricks' v2.35  <2012/12/21> (tvz)
+\pst@dima=\dimen119
+\pst@dimb=\dimen120
+\pst@dimc=\dimen121
+\pst@dimd=\dimen122
+\pst@dimg=\dimen123
+\pst@dimh=\dimen124
+\pst@dimm=\dimen125
+\pst@dimn=\dimen126
+\pst@dimo=\dimen127
+\pst@dimp=\dimen128
+\pst@hbox=\box29
+\pst@ibox=\box30
+\pst@boxg=\box31
+\pst@cnta=\count121
+\pst@cntb=\count122
+\pst@cntc=\count123
+\pst@cntd=\count124
+\pst@cntg=\count125
+\pst@cnth=\count126
+\pst@cntm=\count127
+\pst@cntn=\count128
+\pst@cnto=\count129
+\pst@cntp=\count130
+\@zero=\count131
+\pst@toks=\toks24
+("C:\Program Files (x86)\MiKTeX 2.9\tex\xelatex\xetex-pstricks\pstricks.con"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pstricks\config\xdvipdfmx.cfg")
+)
+\psunit=\dimen129
+\psxunit=\dimen130
+\psyunit=\dimen131
+\pst@C@@rType=\count132
+\pslinewidth=\dimen132
+\psk@startLW=\dimen133
+\psk@endLW=\dimen134
+\pst@customdefs=\toks25
+\pslinearc=\dimen135
+\pst@symbolStep=\dimen136
+\pst@symbolWidth=\dimen137
+\pst@symbolLinewidth=\dimen138
+\everypsbox=\toks26
+\psframesep=\dimen139
+\pslabelsep=\dimen140
+\pst@shift=\dimen141
+\theoverlaybox=\box32
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\xelatex\xetex-pstricks\pstricks.con"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pstricks\config\xdvipdfmx.cfg"
+Using PSTricks configuration for XeTeX+xdvipdfmx
+)))
+File: pstricks.tex 2012/12/21 v2.35 `PSTricks' (tvz,hv)
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\pstricks\base\pst-fp.tex")
+File: pst-fp.tex 2012/12/21 v2.35 `PST-fp' (hv)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: xetex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty"
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\enitkv@toks@=\toks27
+\labelindent=\skip48
+\enit@outerparindent=\dimen142
+\enit@toks=\toks28
+\enit@inbox=\box33
+\enitdp@description=\count133
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\verbatim.sty"
+Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks29
+\verbatim@line=\toks30
+\verbatim@in@stream=\read1
+)
+\pd@logobox=\box34
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\powerdot\powerdot-paintings.sty"
+Package: powerdot-paintings 2005/12/10 v1.1 paintings (TDK,HA)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\times.sty"
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\pifont.sty"
+Package: pifont 2005/04/12 PSNFSS-v9.2a Pi font support (SPQR) 
+LaTeX Font Info:    Try loading font information for U+pzd on input line 63.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\upzd.fd"
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+Requested font "pzdr" at 10.95pt
+ -> pzdr
+LaTeX Font Info:    Try loading font information for U+psy on input line 64.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\upsy.fd"
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+)
+Requested font "psyr" at 10.95pt
+ -> psyr
+)))
+(C:\Users\nathan\Documents\GitHub\assignments\2I03\assignment4\Assignment4.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 9.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1phv.fd"
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+Requested font "phvr7t" at 10.95pt
+ -> phvr7t
+
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: landscape 
+* h-part:(L,W,R)=(0.0pt, 794.96999pt, 0.0pt)
+* v-part:(T,H,B)=(298.11374pt, 298.11375pt, 0.0pt)
+* \paperwidth=1589.9353pt
+* \paperheight=1192.44385pt
+* \textwidth=794.96999pt
+* \textheight=298.11375pt
+* \oddsidemargin=-72.26999pt
+* \evensidemargin=-72.26999pt
+* \topmargin=188.84375pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=11.0pt
+* \footskip=30.0pt
+* \marginparwidth=59.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=36.13718pt
+* \voffset=25.13718pt
+* \mag=2000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+\AtBeginShipoutBox=\box35
+Package hyperref Info: Link coloring OFF on input line 9.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count134
+)
+LaTeX Info: Redefining \ref on input line 9.
+LaTeX Info: Redefining \pageref on input line 9.
+LaTeX Info: Redefining \nameref on input line 9.
 
 
-! Package hyperref Error: Wrong DVI mode driver option `dvips',
-(hyperref)                because pdfTeX or LuaTeX is running in PDF mode.
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
-See the hyperref package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.4319 \ProcessKeyvalOptions{Hyp}
-                                 
-? 
-! Emergency stop.
- ...                                              
-                                                  
-l.4319 \ProcessKeyvalOptions{Hyp}
-                                 
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+(C:\Users\nathan\Documents\GitHub\assignments\2I03\assignment4\Assignment4.bm)
+(C:\Users\nathan\Documents\GitHub\assignments\2I03\assignment4\Assignment4.bm)
+(C:\Users\nathan\Documents\GitHub\assignments\2I03\assignment4\Assignment4.toc)
+Requested font "phvr7t" at 12.0pt
+ -> phvr7t
+Requested font "phvr7t" at 17.28pt
+ -> phvr7t
+Requested font "phvro7t" at 17.28pt
+ -> phvro7t
+Requested font "cmr12" at 12.0pt
+ -> cmr12
+Requested font "cmr8" at 8.0pt
+ -> cmr8
+Requested font "cmr6" at 6.0pt
+ -> cmr6
+Requested font "cmmi12" at 12.0pt
+ -> cmmi12
+Requested font "cmmi8" at 8.0pt
+ -> cmmi8
+Requested font "cmmi6" at 6.0pt
+ -> cmmi6
+Requested font "cmsy10" at 12.0pt
+ -> cmsy10
+Requested font "cmsy8" at 8.0pt
+ -> cmsy8
+Requested font "cmsy6" at 6.0pt
+ -> cmsy6
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 13.
+Requested font "phvr7t" at 10.0pt
+ -> phvr7t
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\se-ascii-print.def"
+File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 
- 
+)
+[1
+
+]
+Requested font "cmmi10" at 10.95pt
+ -> cmmi10
+Requested font "cmsy10" at 10.95pt
+ -> cmsy10
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 15.
+ [2]
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <10.95> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 27.
+Requested font "phvb7t" at 10.95pt
+ -> phvb7t
+Requested font "phvr7t" at 8.0pt
+ -> phvr7t
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 27.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.fd"
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Requested font "pcrr7t" at 10.95pt
+ -> pcrr7t
+
+[3] [4] [5]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 37.
+ [6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 37.
+
+(C:\Users\nathan\Documents\GitHub\assignments\2I03\assignment4\Assignment4.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 37.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 37.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 37.
+ ) 
 Here is how much of TeX's memory you used:
- 3598 strings out of 493921
- 53814 string characters out of 3144873
- 128405 words of memory out of 3000000
- 6926 multiletter control sequences out of 15000+200000
- 3940 words of font info for 15 fonts, out of 3000000 for 9000
- 841 hyphenation exceptions out of 8191
- 44i,0n,70p,278b,36s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 12049 strings out of 429035
+ 173551 string characters out of 3166907
+ 270009 words of memory out of 3000000
+ 15210 multiletter control sequences out of 15000+200000
+ 12793 words of font info for 37 fonts, out of 3000000 for 9000
+ 912 hyphenation exceptions out of 8191
+ 44i,9n,70p,338b,477s stack positions out of 5000i,500n,10000p,200000b,50000s
+
+Output written on Assignment4.pdf (6 pages).
