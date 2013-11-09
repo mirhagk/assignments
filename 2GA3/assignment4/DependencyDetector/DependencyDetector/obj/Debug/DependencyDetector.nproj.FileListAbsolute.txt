@@ -1,0 +1,7 @@
+C:\Users\nathan\Documents\GitHub\assignments\2GA3\assignment4\DependencyDetector\DependencyDetector\bin\Debug\DependencyDetector.exe
+C:\Users\nathan\Documents\GitHub\assignments\2GA3\assignment4\DependencyDetector\DependencyDetector\bin\Debug\DependencyDetector.pdb
+C:\Users\nathan\Documents\GitHub\assignments\2GA3\assignment4\DependencyDetector\DependencyDetector\bin\Debug\Nemerle.dll
+C:\Users\nathan\Documents\GitHub\assignments\2GA3\assignment4\DependencyDetector\DependencyDetector\bin\Debug\Nemerle.xml
+C:\Users\nathan\Documents\GitHub\assignments\2GA3\assignment4\DependencyDetector\DependencyDetector\obj\Debug\DependencyDetector.nprojResolveAssemblyReference.cache
+C:\Users\nathan\Documents\GitHub\assignments\2GA3\assignment4\DependencyDetector\DependencyDetector\obj\Debug\DependencyDetector.exe
+C:\Users\nathan\Documents\GitHub\assignments\2GA3\assignment4\DependencyDetector\DependencyDetector\obj\Debug\DependencyDetector.pdb

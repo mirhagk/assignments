@@ -13,10 +13,10 @@ module Program
   {
       foreach(line in System.IO.File.ReadAllLines("input.txt"))
       {
-          def result = regexp match(line)
+          def result :string = regexp match(line)
           {
-              | "[^ ]* (?<reg1>[^ ]*)" => reg1;
-              | _ => "";
+              | "[^ ]* (?<reg1>[^ ]*),? ?(?<reg2[^ ]*),? ?(?<reg3>[^ ]*),? *" => reg1+" "+reg2+" "+reg3;
+              | ".*" => "";
           }
           Console.WriteLine(result);
       }
