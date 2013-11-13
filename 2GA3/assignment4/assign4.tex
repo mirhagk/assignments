@@ -72,8 +72,43 @@ There are no new hazards introduced, just slightly different things to look out 
 Cross talk between \emph{RegDst} and \emph{MemWrite}, causing them to be the logical \strong{AND} of the 2 inputs. The only case when \emph{MemWrite} is 1 is when the \code{sw} opcode is used. In this case \emph{RegDst} is 0, which means with this cross-talk both \emph{RegDst} and \emph{MemWrite} will always be \code{0/false} which will cause disastrous consequences for code (as \code{sw} will never actually write it's data, and all registers which are supposed to use the 3\rd register to write to end up using the 2\nd instead, which is all \emph{r-format} instructions. In order to detect this problem the following code can be used:
 
 \begin{verbatim}
-	ori $t0 $zero 1
-	ori $t1 $zero 2
-	add $
+    #load in 1 to $t0
+    #immediate value functions expect RegDst to be 0, so they still work
+    ori $t0, $zero, 1
+    ori $t1, $zero, 2 #load in 2 to $t1
+    ori $t2, $zero, 3 #load in 3 to $t2
+    #add $t0 and $t1 and store in $t0
+    #on an affected system, the CPU will store the result in $t1 instead
+    add $t0, $t0, $t1 
+    #the only possible way 2 could equal 3 would be on the broken system
+    beq $t1, $t2, Fault 
 \end{verbatim}
+
+\subsection{Part B}
+
+Cross talk between \emph{RegDst} and \emph{MemWrite}, causing them to be the logical \strong{OR} of the 2 inputs. This means that \code{sw} will now work correctly, but every instruction that sets \emph{RegDst} to 1 will also write to memory. In particular the \emph{r-format} instructions all set \emph{RegDst} to 1, so they will also write the 2\nd read register to memory (the memory location determined by the result of the operation). In order to detect this problem the following code can be used:
+
+\begin{verbatim}
+    #translated to lui and ori, both of which are I-format 
+    #and not affected by this bug
+    #temp is any temporary memory location that is non-zero
+    li $t0, temp 
+    ori $t1, $zero, 0#load 0 into t1
+    sw $t1, 0($t0) #store 0 into the temp memory location
+    #if the machine has this bug then it'll store 2\nd read register 
+    #(which is the address of temp) into the location determined by the result 
+    #(which is also the address of temp)
+    #this basically means that the temp memory location now contains it's own 
+    #address (which is why it must be non-zero)
+    add $t2, $t1, $t0 
+    lw $t2, 0($t0) #load temp back in
+    beq $t2, $t1, end #check if temp is still 0
+    j fault #the only way we're here is if temp was altered between sw and lw
+end:   #if we reach this point we're successful, so the rest of the code can go here
+\end{verbatim}
+
+\subsection{Part C}
+
+Cross talk between the last segment and the \emph{EX} segment of the \emph{RegWrite} causing them to be the logical \strong{AND} of the 2 inputs.
+
 \end{document}
