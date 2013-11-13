@@ -52,9 +52,9 @@
 \end{frame}
 
 \begin{frame}{Automatic Memory Management}
-	\textbf{Garbage Collection:}
+	\textbf{Tracing Garbage Collector:}
 	\begin{itemize}
-		\item Periodically follow program references
+		\item Periodically pause program and follow program references
 		\item Collect anything not referred to
 	\end{itemize}
 	\textbf{Reference Counting:}
@@ -64,6 +64,27 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Tracing Garbage Collector}
+	\textbf{Pros:}
+	\begin{itemize}
+		\item Is lazy about collecting
+		\item Can detect and collect all forms of garbage
+		\item Can compact memory to improve cache performance
+	\end{itemize}
+	\textbf{Cons:}
+	\begin{itemize}
+		\item Requires pausing the program during execution
+		\item Needs complete control over the memory
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Reference Counting}
+	\textbf{Pros:}
+	\begin{itemize}
+		
+	\end{itemize}
+
+\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Memory Management}
