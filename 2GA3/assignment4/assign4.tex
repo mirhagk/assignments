@@ -137,7 +137,6 @@ In short, if you believe your processor could have cross-talk here, it's not wor
 \section{Question 4.6}
 
 \begin{verbatim}
-
 I1:      lw $t0, 4($s3)
 I2:      addi $t0, $t0, 4
 I3:      sw $t1, 0($t0)
@@ -167,6 +166,123 @@ I9:     sw $t1, 0($t3)
 
 \subsection{Part B}
 
+\begin{verbatim}
+    lw $t0, 4($s3)
+    NOP #stall from RAW
+    NOP
+    addi $t0, $t0, 4
+    NOP #stall from RAW
+    NOP
+    sw $t1, 0($t0)
+    add $t1, $t0, $t1
+    lw $t2, 12($s3)
+    NOP #stall from RAW
+    NOP
+    addi $t2, $t2, -4
+    NOP #stall from RAW
+    NOP
+    lw $t3, 8($t2)
+    sw $s3, 0($t1)
+    NOP #stall from RAW of $t3
+    sw $t1, 0($t3)
+\end{verbatim}
 
+\subsection{Part C}
+
+\begin{verbatim}
+    lw $t0, 4($s3)
+    NOP #stall from RAW
+    NOP
+    addi $t0, $t0, 4 #normally RAW, but can forward ALU-ALU
+    sw $t1, 0($t0)
+    add $t1, $t0, $t1
+    lw $t2, 12($s3)
+    NOP #stall from RAW
+    NOP
+    addi $t2, $t2, -4 #normally RAW, but can forward ALU-ALU
+    lw $t3, 8($t2)
+    sw $s3, 0($t1)
+    NOP #stall from RAW of $t3
+    sw $t1, 0($t3)
+\end{verbatim}
+
+\subsection{Part D}
+
+\begin{verbatim}
+    lw $t0, 4($s3) 
+    NOP #stall from RAW, forward MEM-ALU (but still stalls once)
+    addi $t0, $t0, 4 #normally RAW, but can forward ALU-ALU
+    sw $t1, 0($t0)
+    add $t1, $t0, $t1
+    lw $t2, 12($s3)
+    NOP #stall from RAW, forward MEM-ALU (but still stalls once)
+    addi $t2, $t2, -4 #normally RAW, but can forward ALU-ALU
+    lw $t3, 8($t2)
+    sw $s3, 0($t1) #normally RAWs stall, but MEM-ALU avoids 2nd stall
+    sw $t1, 0($t3)
+\end{verbatim}
+
+\subsection{Part E}
+
+\begin{tabular}{c|c|c|c}
+Forwarding type & Cycle time & \# number of cycles & Total time\\\hline
+No forwarding & 250ps & 18 & 4500ps \\
+ALU-ALU forwarding & 280ps & 14 & 3920ps \\
+Full forwarding & 300ps & 11 & 3300ps
+\end{tabular}
+
+\vspace{5mm}
+\\Speedup by adding full forwarding to a pipeline with no forwarding:
+\[
+	1 - \frac{\text{Old Time}}{\text{New Time}} = 1 - \frac{4500}{3300} = 1 - 1.3636 = 0.3636 = 36\%
+\]
+
+Speedup by adding full forwarding to a pipeline with ALU-ALU forwarding
+\[
+	1 - \frac{\text{Old Time}}{\text{New Time}} = 1 - \frac{3920}{3300} = 1 - 1.1879 = 0.1879 = 19\%
+\]
+
+\subsection{Part F}
+
+\begin{verbatim}
+    lw $t2, 12($s3)
+    lw $t0, 4($s3)
+    #RAW hazard with $t2
+    addi $t2, $t2, -4
+    addi $t0, $t0, 4
+    #RAW hazard with $t2
+    lw $t3, 8($t2)
+    add $t1, $t0, $t1
+    sw $t1, 0($t0) #this must read from $t1 before the previous writes to it
+    #RAW haazard with $t1
+    sw $s3, 0($t1)
+    sw $t1, 0($t3)
+\end{verbatim}
+
+\subsection{Part G}
+
+\begin{verbatim}
+    lw $t2, 12($s3)
+    lw $t0, 4($s3)
+    NOP
+    addi $t2, $t2, -4
+    addi $t0, $t0, 4
+    NOP
+    lw $t3, 8($t2)
+    add $t1, $t0, $t1
+    sw $t1, 0($t0) #this must read from $t1 before the previous writes to it
+    NOP
+    sw $s3, 0($t1)
+    sw $t1, 0($t3)
+\end{verbatim}
+
+subsection{Part H}
+
+\begin{tabular}{c|c|c|c}
+Forwarding type & Cycle time & \# number of cycles & Total time\\\hline
+No forwarding & 250ps & 12 & 3000ps
+\end{tabular}
+
+Re-ordering it can save a significant amount of time without even having to implement forwarding. If forwarding was implemented here, then all the remaining NOPs could be removed, and it'd be down to 9 instructions (and take a total of 2700ps)
 
 \end{document}
