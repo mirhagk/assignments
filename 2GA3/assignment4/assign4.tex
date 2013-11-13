@@ -296,4 +296,103 @@ No forwarding & 250ps & 12 & 3000ps
 
 Re-ordering it can save a significant amount of time without even having to implement forwarding. If forwarding was implemented here, then all the remaining NOPs could be removed, and it'd be down to 9 instructions (and take a total of 2700ps)
 
+\section{Bonus Part}
+
+\emph{No this bonus question wasn't ever given. I just decided to give it to myself because it intrigued me.}\\
+
+\code{lwr} and \code{swr} can be extended to use the \strong{shamt} to shift one of the operands. In this way the following instruction sequence:
+
+\begin{verbatim}
+    #s0 contains the base array address
+    #s1 contains the index, needs to be multipled by 4
+    #s2 contains the information to write
+    sll $t0, $s1, 2
+    add $t0, $s0, $t0
+    sw $s2, 0($t0)
+\end{verbatim}
+
+Can be transformed into just \code{swr \$s2, \$s1, \$s0, 2} which adds the array base to the index shifted by 2. This not only saves 2 instructions, it also saves 1 temporary register. In order to do this we need to modify the pipelined CPU in the following way:
+
+\includegraphics[width=\textwidth]{pipelineCPU5.png}
+
+This adds to the existing modified CPU a new component which shifts the first read register by the amount given by \strong{shamt} ([10-6]) if the \emph{ShAmt} control pin is set (which is set to true for all \emph{r-format} instructions, it could probably be replaced by \emph{RegDst} if a new control pin is not wanted). This enables us to shift the one register, add it to the 2nd and then use that as the address to use.
+
+By adding this to all \emph{r-format} instructions, other instructions can use it as well, enabling quite a few other optimizations, including the following:
+
+\subsection{Index Offsets}
+
+This is the one given above, basically can reduce a 3 instruction, with one temprorary register sequence to 1 instruction with no temporary registers. In addition to this it can also be used to calculate addresses for use by pointers. In this way it's essentially the \code{LEA} instrution in X86, except it can't add a constant, so many of the same tricks can be used.
+
+\subsection{Multiply by 2n+1}
+
+In order to multiply a number by a constant, MIPs requires 3 instructions:
+
+\begin{verbatim}
+    #s0 contains the number to be multipled, and stored in s1
+    ori $t0, $zero, 3
+    mult $t0, $s0
+    mflo $s1
+\end{verbatim}
+
+Worse is that the multiply instruction is quite expensive and may require several cycles. In our CPU here, it probably isn't even implemented. Luckily it can be hardcoded. For powers of 2 it's quite easy, just do something like this (for $\times 4$) \code{sll \$s1, \$s0, 2}. However for something like $\times 5$ something like the following has to be used:
+
+\begin{verbatim}
+    #again s0 contains the number to be multipled and stored in s1
+    sll $s1, $s0, 2
+    add $s1, $s1, $s0
+\end{verbatim}
+
+Which is a 2-instruction sequence that we can now optimize to a single instruction with \code{add \$s1, \$s0, \$s0, 2} (which adds it to itself shifted by 2), so now we can multiply by $2n+1$ in a single instruction as well.\\
+
+Similarily we can use sub to multiply by $2n-1$ with \code{sub \$s1, \$s0, \$s0, 2} (which subtracts \$s0 from itself shifted by 2).
+
+\subsection{Mask and Move bit operation}
+
+Oftentimes people pack information into a single word in order to store it more compactly. Let's say we have a 32-bit word that contains 32 flags (bit values for \code{true}/\code{false}), the following operation is needed to get the 5\nth flag for instance (using a mask):
+
+\begin{verbatim}
+    #s0 contains the flag word
+    #s1 contains the mask
+    #s2 contains the result
+    sll $s2, $s0, -5
+    and $s2, $s2, $s1
+\end{verbatim}
+
+This means it requires 2 operations for a fairly trivial operation (bit masking is used for all sort of situations, for instance on the new iOS device, the upper 32 bits of the 64 bit pointer is used for refernce counting as well as other additional information. This means using this pointer requires bit masking). With the new modifications this can be done in a single operation (assuming the mask is already loaded).
+
+\begin{verbatim}
+    #s0 contains the flag word
+    #s1 contains the mask
+    #s2 contains the result
+    and $s2, $s2, $s1, -5
+\end{verbatim}
+
+This saves a single operation for the 2-operation sequence, but the impact could be even greater, since it is now a single operation to get various sections out of a word, compressing several things into a single word is a much more plausible thing to do. If this optimization causes it to be plausible to store entire structures, the optimization could be even better. Let's say we have the following C struct:
+
+\begin{verbatim}
+    struct
+    {
+        c1: char;
+        c2: char;
+        c3: char;
+        b1: bool;
+        b2: bool;
+        b3: bool;
+        b4: bool;
+        b5: bool;
+        b6: bool;
+        b7: bool;
+        b8: bool;
+    }
+\end{verbatim}
+
+That is a structure storing 3 chars, and 8 boolean values, without bit masking this would take a word for each field, which is 11 words. Using bit masking this would only take 1 word, at the expense of an additional operation to access each value. By enabling the \strong{shamt} and making it take just one instead of 2, that's a very real performance difference for accessing fields, and could make this possible to do. In return we now have only 1 word, and the cache only needs to be an 11\nth of the size in order to get the same performance (and for the same cache size, we'd get much better performance). Alternatively you could use \code{lb} and \code{sb} to grab individual bytes (and this would only take 11 bytes instead, or 3 words), but if mutliple fields are needed, this is wasteful (as to grab 4 fields, you'd need 4 loads instead of 1). 
+
+If systems use space in the pointer to store a reference count, this optimization makes reference counting much faster, and since working with pointers is a very common operation, this would cause very real performance gains.
+
+\subsection{Analysis of impact}
+
+This adds additional work which must be done to the 1\st read register, but shifts are fast (each calculation for each bit is independent of the rest) and it's done in the \emph{Instruction Decode} stage. This work can also be done while determining the 3\rd read register is done, so it probably doesn't have any more of an impact than simply adding \code{swr} does. The extra control pin can probably be replaced by the existing \code{RegDst} control pin (as long as the undefined states for non-\emph{r-format} instructions is set to \code{false}). In return several very nice optimizations can be made, including ones that could speed up runtimes (reference counting ones in particular) by a very real amount.
+
 \end{document}
+
