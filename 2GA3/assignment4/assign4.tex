@@ -109,6 +109,64 @@ end:   #if we reach this point we're successful, so the rest of the code can go 
 
 \subsection{Part C}
 
-Cross talk between the last segment and the \emph{EX} segment of the \emph{RegWrite} causing them to be the logical \strong{AND} of the 2 inputs.
+Cross talk between the last segment and the \emph{EX} segment of the \emph{RegWrite} causing them to be the logical \strong{AND} of the 2 inputs. This means that an instruction will only write back into the register if the instruction 2 cycles behind it is also writing back into a register (ie both are \emph{r-format} or \code{lw} instructions). Depending on the cross-talk it could also mean that the \emph{RegWrite} control bit could be affect by the instruction 2 cycles earlier. (For simplicity sake, I'm going to assume that the first 2 instructions don't get affected by the state of the \emph{RegWrite} line 2 cycles before them (which would make it completely undefined)). The following code might detect the problem:
+
+\begin{verbatim}
+    #this instruction write backs succesfully
+    ori $t0, $zero, 2 #load 2 into t0
+    #this instruction writes back succesfully
+    ori $t1, $zero, 2 $load 2 into t1
+    #this instruction fails on a problematic machine
+    ori $t0, $zero, 3 #load 3 into t0
+    #this is basically a nop to ensure instruction 2 works
+    ori $t0, $t0, 0
+    #this serves a dual purpose, it compares t0 and t1
+    #and it also screws up isntruction 3 on a problem machine
+    beq $t0, $t1, fault # go to fault if instruction 3 didn't work
+\end{verbatim}
+
+This code may not always work however, because depending on the implementation, it could have pipeline stalls. Simple stalls based on register usage could be avoided by adding the \code{ori $t0, $t0, 0} nop intermixed with regular \code{nop} depending on whether the instruction 2 prior should succeed or fail, but there will always be a chance that loading the instruction itself causes a cache miss, and stalls the pipeline. Also since the CPU can feel free to re-order instructions without dependencies, there is no saying that it won't re-order the program to make it execute completely differently.
+
+\subsection{Part D}
+
+Cross talk between the last segment and the \emph{EX} segment of the \emph{RegWrite} causing them to be the logical \strong{OR} of the 2 inputs. This means that the instruction will write back into the regiser if either it should write back, or the instruction 2 later should write back (again, depending on the nature of the cross talk, it could also be affected by instructions 2 prior, and again for simplicity I'm assuming the first 2 instructions aren't affected by the state of \emph{RegWrite} before the program starts). There is no code to detect it, since this cross-talk will only make things that aren't supposed to set RegWrite to have RegWrite set. This means \code{sw} and \code{beq}. However what gets written and where is undefined since \emph{MemToReg} and \emph{RegDst} are both undefined for those opcodes. So this means that either the result of the ALU, or the memory at the location of the result of the ALU could be written. This could be gotten around by making both of those the same (for the simple case, make them both zero), but which register they write to is undefined, and worse they could potentially write to a register that's part of the immediate value in the opcode. It would be very difficult to get around both of these problems, and considering how much any pipeline stalls would screw up the code (and since both \code{beq} and \code{sw} are very prone to causing stalls in unpredictable ways), it would be irresponsible to believe the effort would be worth it.
+
+In short, if you believe your processor could have cross-talk here, it's not worth you time to diagnose it, go out and buy a new processor, they are super cheap.
+
+
+\section{Question 4.6}
+
+\begin{verbatim}
+
+I1:      lw $t0, 4($s3)
+I2:      addi $t0, $t0, 4
+I3:      sw $t1, 0($t0)
+I4:     add $t1, $t0, $t1
+I5:     lw $t2, 12($s3)
+I6:     addi $t2, $t2, -4
+I7:     lw $t3, 8($t2)
+I8:     sw $s3, 0($t1)
+I9:     sw $t1, 0($t3)
+\end{verbatim}
+
+\subsection{Part A}
+
+\begin{tabular}{c|c|c|c}
+	Type & Register & Instruction 1 & Instruction 2\\\hline
+	RAW & \$t0 & I1 & I2 \\
+	WAW & \$t0 & I1 & I2 \\
+	RAW & \$t0 & I2 & I3 \\
+	WAR & \$s3 & I5 & I8 \\
+	RAW & \$t1 & I3 & I4 \\
+	WAW & \$t1 & I3 & I4 \\
+	RAW & \$t1 & I4 & I8 \\
+	WAR & \$t1 & I8 & I9 \\
+	RAW & \$t2 & I6 & I7 \\
+	RAW & \$t3 & I7 & I9 
+\end{tabular}
+
+\subsection{Part B}
+
+
 
 \end{document}
