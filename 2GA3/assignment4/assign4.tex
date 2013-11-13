@@ -54,9 +54,20 @@ Adding this new command \code{swr} requires reading from a 3\rd register, but it
 
 \subsection{Part B}
 
-\includegraphics[width=\textwidth]{pipelineCPU2.png}
+\includegraphics[width=\textwidth]{pipelineCPU4.png}
 
-This picture is very similar to the previous one. Again the only change required is to use the write register selector to select a 3\rd  register to read from. The pipelined version also additionally requires a new spot to hold the register data between the \emph{Instruction Decode} and the \emph{Execute} stages (the one to hold the data between \emph{Execute} and \emph{Memory} already was there).
+The pipelined version requires a few more changes. We can't simply re-use the write register selector, since in the original diagram it's not known until the \emph{Execute} stage. We alter it to move the calculation of which register to use to the \emph{Instruction Decode} stage, so we can select the read register. This actually saves us a pipeline register which we can use to store the result of the 3\rd read register.
+
+In this version we do change the circuit in a more major way, however all of the additional logic is in the \emph{Instruction Decode} stage, which is usually seen as one of the shorter stages, so making it take longer might not even increase the time for each pipeline stage, since it's normally waiting for \emph{Execute} to complete.
+
+Whether \code{swr} is worth implementing or not really would come down to seeing if it extends the time of \emph{Instruction Decode} past the time it's waiting, and if it does, if saving the instruction calls offsets the additional time added. However \code{lwr} can be implemented without any significant changes to the CPU (simply adding a new entry to the \strong{Control} table logic), and so can be easily implemented. If \code{swr} is deemed to be too expensive it can be implemented as a pseudo-instruction such that \code{swr \$t0, \$t1, \$t2} compiles to:
+
+\begin{verbatim}
+    add $at, $t1, $t2
+    sw $$t0 0($at)
+\end{verbatim}
+
+In this way you'd be able to have the benefit of \code{lwr} without any of the complexity introduced by \code{swr}.
 
 \subsection{Part C}
 
@@ -232,7 +243,7 @@ Full forwarding & 300ps & 11 & 3300ps
 \end{tabular}
 
 \vspace{5mm}
-\\Speedup by adding full forwarding to a pipeline with no forwarding:
+Speedup by adding full forwarding to a pipeline with no forwarding:
 \[
 	1 - \frac{\text{Old Time}}{\text{New Time}} = 1 - \frac{4500}{3300} = 1 - 1.3636 = 0.3636 = 36\%
 \]
