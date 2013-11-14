@@ -73,7 +73,7 @@
 	\end{itemize}
 	\textbf{Cons:}
 	\begin{itemize}
-		\item Requires pausing the program during execution
+		\item Requires pausing the program during collection
 		\item Needs complete control over the memory
 	\end{itemize}
 \end{frame}
@@ -88,7 +88,72 @@
 	\begin{itemize}
 		\item Poor locality (poor cache performance)
 		\item Increment/Decrement for all reference copying takes a non-insignificant amount of time.
+		\item Can't detect cycles
 	\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Block Based Memory Allocation}
+%\begin{frame}{Block Based Memory Allocation}
+	Normally memory allocation involves maintaining a list of all free locations and selecting one.\\
+	
+	Block based memory allocation can allocate memory within a block by simply incrementing a pointer. Example:
+\begin{lstlisting}[caption=Bump Pointer Memory Allocation]
+function allocate(size)
+    if pointer+size < block.length
+        result = pointer
+        pointer += size
+        return result
+    else
+        block = getFreeBlock()
+        pointer=0
+\end{lstlisting}
+
+\end{frame}
+
+\begin{frame}{Block Based Memory Allocation}
+	\begin{itemize}
+		\item With a large enough block size, the majority of calls will simply increment the pointer.
+		\item Avoids expensive free list walking
+		\item Also sequential calls to memory allocator will allocate memory sequentially (great for cache)
+		\pause
+		\item requires entire blocks to be free before any item can be used
+		\pause
+		\item Okay for tracing collector (can move objects)
+		\pause
+		\item Not usable for reference counting
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Ref. Counting Problems}
+	\textbf{Summary of problems with reference counting:}
+	\begin{itemize}
+		\item Increment/Decrement can take up non-trivial amounts of time
+		\item Allocation is much more expensive than tracing collectors
+		\item Poor cache performance (bad locality)
+		\item Can't detect cycles
+		\item Requires an entire word to store counter reliably (32 bits for every object on current machines)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Introducing RCImmix}
+	\textbf{RCImmix - reference counting on steroids}
+	\begin{itemize}
+		\item Builds upon serious of smaller optimizations
+		\item Can detect cycles
+		\item Can use block-based memory allocation
+		\item Much better cache performance
+		\item requires only a few bits to store counter (can even use existing space in object header)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Performance Comparisons}
+	Tracing Garbage collection can perform much faster than Reference counting for several reasons:
+	\begin{itemize}
+		\item Can free large chunks, and allocate memory by simply incrementing the pointer
+	\end{itemize}
+
 \end{frame}
 
 \begin{frame}[fragile]
