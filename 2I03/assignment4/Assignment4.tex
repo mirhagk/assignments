@@ -112,22 +112,36 @@
 	\end{center}
 	\begin{itemize}
 		\item Includes one cycle
+		\item A is the root of the program %only one you have reference to
 	\end{itemize}
 \end{frame}
 \begin{frame}{Initial Memory State}
 	\begin{center}
 		\includegraphics[width=\textwidth]{graphics/memState1.png}
 	\end{center}
+	\begin{itemize}
+		\item A stops referring to 
+		\item  B now has no references to it, and dies
+	\end{itemize}
 \end{frame}
 \begin{frame}{Initial Memory State}
 	\begin{center}
 		\includegraphics[width=\textwidth]{graphics/memState2.png}
 	\end{center}
+	\begin{itemize}
+		\item B is freed, and decrements the references it's pointing to
+		\item D now has no references to it, and becomes dead
+	\end{itemize}
 \end{frame}
 \begin{frame}{Initial Memory State}
 	\begin{center}
 		\includegraphics[width=\textwidth]{graphics/memState3.png}
 	\end{center}
+	\begin{itemize}
+		\item D is freed, and decrements the references it's pointing to
+		\item But F still has G pointing to it, so it doesn't get freed
+		%Even though you can no longer access it
+	\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
