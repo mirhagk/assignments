@@ -2,6 +2,7 @@
 ## LaTeX files
 #################
 
+*.nav
 *.aux
 *.pdf
 *.synctex.gz
