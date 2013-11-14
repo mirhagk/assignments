@@ -82,14 +82,13 @@
 	\textbf{Pros:}
 	\begin{itemize}
 		\item Doesn't normally stall\footnote{Can still stall a bit if large chains are freed from a single decrement, ie with large linked lists}
-		\item 
+		\item Memory gets released at precise, defined times (as soon as they have no more references to them)
 	\end{itemize}
 	\textbf{Cons:}
 	\begin{itemize}
 		\item Poor locality (poor cache performance)
-		\item Increment/Decrement for all reference copying takes a non-insignificant time.
+		\item Increment/Decrement for all reference copying takes a non-insignificant amount of time.
 	\end{itemize}
-
 \end{frame}
 
 \begin{frame}[fragile]
