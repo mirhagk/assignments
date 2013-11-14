@@ -93,6 +93,43 @@
 \end{frame}
 
 
+\begin{frame}{Cycles}
+	\begin{center}
+		\includegraphics[width=75mm]{graphics/cycles.png}
+	\end{center}
+	\begin{itemize}
+		\item A points to B
+		\item B points to A
+		\item only way A reach 0 is if B reaches 0
+		\item since A points to B, B can't reach 0 until A does
+		\item Reference Counting can't collect this
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Initial Memory State}
+	\begin{center}
+		\includegraphics[width=\textwidth]{graphics/memState0.png}
+	\end{center}
+	\begin{itemize}
+		\item Includes one cycle
+	\end{itemize}
+\end{frame}
+\begin{frame}{Initial Memory State}
+	\begin{center}
+		\includegraphics[width=\textwidth]{graphics/memState1.png}
+	\end{center}
+\end{frame}
+\begin{frame}{Initial Memory State}
+	\begin{center}
+		\includegraphics[width=\textwidth]{graphics/memState2.png}
+	\end{center}
+\end{frame}
+\begin{frame}{Initial Memory State}
+	\begin{center}
+		\includegraphics[width=\textwidth]{graphics/memState3.png}
+	\end{center}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Block Based Memory Allocation}
 %\begin{frame}{Block Based Memory Allocation}
@@ -145,6 +182,15 @@ function allocate(size)
 		\item Can use block-based memory allocation
 		\item Much better cache performance
 		\item requires only a few bits to store counter (can even use existing space in object header)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{RCImmix - Cycle Collection}
+	\begin{itemize}
+		\item Don't worry about cycles
+		\item Will lead to unclaimed garbage
+		\item Backup tracing collector
+		\item Will eventually be discovered and collected
 	\end{itemize}
 \end{frame}
 
