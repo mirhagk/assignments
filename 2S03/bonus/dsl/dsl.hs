@@ -4,7 +4,7 @@ module DSL where
 import Prelude hiding ((+),(*),(==))
 import qualified Prelude as P
 
-
+z = prettyPrint (1+2)
 data Expr = Null
   | Const Int
   | Var [Char]
@@ -29,24 +29,21 @@ instance Mathable Expr where
 instance Mathable Int where
 	toPoly x = (Const x)
 	
---instance Mathable Integer where
---	toPoly x = (Const (fromInteger x))
+instance Mathable Integer where
+	toPoly x = (Const (fromInteger x))
 	
 instance Mathable Double where
 	toPoly x = (Const (floor x))
 
 instance Mathable Char where
 	toPoly x = (Var [x])
-
---instance  Read Expr  where
---	readsPrec _ s = [(Var s, "")]
+	
 instance Show Expr where
 	show = printPoly
 
 infixl 7 *
 infixl 6 +
 	
---printPoly $ simplify $ diff (1 + 2 + 3 * (Var "x") * (Var "x") * (Var "y")) "x"
 polyEqual x y = eval x == eval y
 
 collectConstants :: Expr -> Expr
