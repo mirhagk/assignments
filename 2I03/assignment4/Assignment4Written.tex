@@ -6,15 +6,18 @@
 \usepackage{listings}
 
 \title{A Description of the RCImmix Algorithm}
+\author{Nathan Jervis}
 
 
 \begin{document}
 
+\maketitle
+
 \section{Introduction}
 
-RCImmix is an extension of modern reference counting, including many optimizations to decrease the problems with reference counting\footnote{Reference counting's inability to collect cycles is an example} and increase the performance to make it competitive to a tracing garbage collector\footnote{The reference counting engine in languages such as Objective-C and PHP are 40\% slower than modern tracing garbage collectors}.
+RCImmix is an extension of modern reference counting, including many optimizations to decrease the problems with reference counting\footnote{Reference counting's inability to collect cycles is an example} and increase the performance to make it competitive to a tracing garbage collector\footnote{The reference counting engine in languages such as Objective-C and PHP are 40\% slower than modern tracing garbage collectors\cite{rcimmix}[pg 6]}.
 
-\section{Reference Counting vs Tracing Garbage Collection}
+\section{Reference Counting vs Tracing}
 
 There has been much debate in the past over which methods should be used, and each has a set of pros and cons. Reference counting doesn't have long stalls, but has slower performance overall, RCImmix was created to solve this. RCImmix increases the speed of reference counting, at the cost of having stalls, but much more infrequently than traditional tracing collectors.
 
@@ -23,7 +26,11 @@ There has been much debate in the past over which methods should be used, and ea
 Here are the new features of RCImmix over traditional reference counting.
 
 \begin{itemize}
-
+	\item Tracing collector as a backup \--- Can eventually detect cycles now
+	\item Limited reference count bits \--- Only a few bits are needed, since most objects are only referred to a small number of times. If this count overflows, then let the tracing collector fix it
+	\item Objects start as dead \--- Since most objects die before ever being copied, this can avoid a lot of work until the object is actually copied
+	\item Allocate using blocks \--- Much faster allocation, as well it improves cache performance (objects allocated at the same time likely are next to each other). Tracer can compact blocks, so fragmentation isn't an issue.
+	\item Nursery of objects \--- Objects are "born" into the nursery, which is a block with only new objects. As soon as it's copied it's moved out of the nursery into another block. This means that the entire nursery block can be freed at the same time, which is a great source of new free memory (since most objects die young), so this avoids having to call the tracer until enough "mature" objects become garbage
 \end{itemize}
 
 
