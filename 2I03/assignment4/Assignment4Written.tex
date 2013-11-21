@@ -1,0 +1,33 @@
+\newcommand{\code}{\texttt}
+
+\documentclass{article}
+
+\usepackage{pseudocode}
+\usepackage{listings}
+
+\title{A Description of the RCImmix Algorithm}
+
+
+\begin{document}
+
+\section{Introduction}
+
+RCImmix is an extension of modern reference counting, including many optimizations to decrease the problems with reference counting\footnote{Reference counting's inability to collect cycles is an example} and increase the performance to make it competitive to a tracing garbage collector\footnote{The reference counting engine in languages such as Objective-C and PHP are 40\% slower than modern tracing garbage collectors}.
+
+\section{Reference Counting vs Tracing Garbage Collection}
+
+There has been much debate in the past over which methods should be used, and each has a set of pros and cons. The next few sections cover the pros and cons of reference counting.
+
+\subsection{Pros}
+
+Able to 
+
+
+\section{Algorithm}
+
+\subsection{Overview}
+
+As with all reference counting, the user interacts with the garbage collector by calling 2 methods.
+
+
+\end{document}
