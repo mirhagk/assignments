@@ -20,14 +20,43 @@ There has been much debate in the past over which methods should be used, and ea
 
 \subsection{Pros}
 
-Able to 
+Able to \cite{rcimmix}
 
 
 \section{Algorithm}
 
 \subsection{Overview}
 
-As with all reference counting, the user interacts with the garbage collector by calling 2 methods.
+As with all reference counting, the user interacts with the garbage collector by calling 3 methods, \code{allocate}, \code{retain} and \code{release}
+
+\begin{pseudocode}{User Code}{args}
+\MAIN
+	x \GETS \CALL{allocate}{size}\\
+	doWork\\
+	y \GETS x\\
+	\CALL{retain}{y}\\
+	moreWork\\
+	\CALL{release}{y}\\
+	finalWork\\
+	\CALL{release}{x}\\
+\ENDMAIN
+\end{pseudocode}
+
+Of course the pointers x and y here could be in completely different parts of the program, as long as upon each copy, we call retain, and after the pointer stops being referred to, we call release, then anything else is okay.
+
+The first 
+
+
+%\begin{pseudocode}{User Code}{}
+%	pointer.location \GETS \CALL{blockAllocate}{size}\\
+%	pointer.count \GETS 1\\
+%	\RETURN{pointer}
+%\end{pseudocode}\\
+
+
+\bibliographystyle{unsrt}
+\bibliography{assignment4written} % requires file critique.bib
+
 
 
 \end{document}
