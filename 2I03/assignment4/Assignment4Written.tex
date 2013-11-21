@@ -16,27 +16,31 @@ RCImmix is an extension of modern reference counting, including many optimizatio
 
 \section{Reference Counting vs Tracing Garbage Collection}
 
-There has been much debate in the past over which methods should be used, and each has a set of pros and cons. The next few sections cover the pros and cons of reference counting.
+There has been much debate in the past over which methods should be used, and each has a set of pros and cons. Reference counting doesn't have long stalls, but has slower performance overall, RCImmix was created to solve this. RCImmix increases the speed of reference counting, at the cost of having stalls, but much more infrequently than traditional tracing collectors.
 
-\subsection{Pros}
+\subsection{New Features of RCImmix}
 
-Able to \cite{rcimmix}
+Here are the new features of RCImmix over traditional reference counting.
+
+\begin{itemize}
+
+\end{itemize}
 
 
 \section{Algorithm}
 
 \subsection{Overview}
 
-As with all reference counting, the user interacts with the garbage collector by calling 3 methods, \code{allocate}, \code{retain} and \code{release}
+As with all reference counting, the user interacts with the garbage collector by calling 3 methods, \code{Allocate}, \code{Retain} and \code{Release}. \code{Allocate} is called whenever creating a new object, this is used with all memory managers, manual or automatic. Then \code{Retain} is called whenever the object is copied, so that the number of references to it can be incremented. Lastly \code{Release} is called for each reference to the object as soon as that reference stops pointing to it.
 
 \begin{pseudocode}{User Code}{args}
 \MAIN
-	x \GETS \CALL{allocate}{size}\\
+	x \GETS \CALL{Allocate}{size}\\
 	doWork\\
+	\CALL{Retain}{y}\\
 	y \GETS x\\
-	\CALL{retain}{y}\\
 	moreWork\\
-	\CALL{release}{y}\\
+	\CALL{Release}{y}\\
 	finalWork\\
 	\CALL{release}{x}\\
 \ENDMAIN
@@ -44,14 +48,119 @@ As with all reference counting, the user interacts with the garbage collector by
 
 Of course the pointers x and y here could be in completely different parts of the program, as long as upon each copy, we call retain, and after the pointer stops being referred to, we call release, then anything else is okay.
 
-The first 
+\subsubsection{Allocate}
+
+The first major difference with RCImmix is how it allocates. Since it can count on a backup tracer, and can copy objects opportunistically, it can allocate using a a bump pointer in a block, and maintain only a list of a few blocks rather than a complete free list of memory. For the majority of allocate calls, it will simply be incrementing a pointer and returning the value, which is the cheapest form of memory management, even cheaper than manual memory management.
 
 
-%\begin{pseudocode}{User Code}{}
-%	pointer.location \GETS \CALL{blockAllocate}{size}\\
-%	pointer.count \GETS 1\\
-%	\RETURN{pointer}
-%\end{pseudocode}\\
+\begin{pseudocode}{Allocate}{size}
+	\GLOBAL{bumpPointer, block}\\\\
+	\IF size < block.end - bumpPointer \THEN
+		\BEGIN
+			pointer \GETS bumpPointer\\
+			bumpPointer \GETS bumpPointer + size + 1\\
+		\END\\
+	\ELSE
+		\BEGIN
+			block \GETS \CALL{GetNewFreeBlock}{}\\
+			\RETURN{\CALL{Allocate}{size}}\\
+		\END\\\\
+	pointer.new \GETS \TRUE
+	pointer.count \GETS 0
+	\RETURN{pointer}
+\end{pseudocode}
+
+In this method we first check if there's enough free space (by just comparing the difference between the bump pointer and the end of the block). If there is then make the pointer equal to what the bump pointer is currently looking at, and then increment the bump pointer by the size (for next time). It also adds one byte so that there's enough space for the header of the object. If there isn't enough free space, get a new free block, and recursively call itself with that new block. Then just setup the object header and return the pointer. 
+
+The object is created as new, and considered dead upon creation. This has the benefit that a lot less work has to be done for new objects, as this work is delayed until the \code{Retain} method is called.
+
+GetNewFreeBlock method is not relevant to this algorithm (it just needs to select a new block to use). The only key part of the GetNewFreeBlock method is that it may need to collect memory in which case it'll call \code{Collector} which is described later on.
+
+\subsubsection{Retain}
+
+The next method is the \code{Retain} method which gets called whenever the object is copied to a new pointer. It must be called before any other pointer gets assigned to it, and the pointer is passed by reference so it can be modified.
+
+\begin{pseudocode}{Retain}{object}
+	\IF object.new = \FALSE \THEN
+	\BEGIN
+		\IF object.count \NOT max \THEN
+		object.count \GETS object.count + 1\\
+		\RETURN{}
+	\END\\
+	pointer \GETS \CALL{CopyToNewLocation}{object}\\
+	\CALL{AddToModBuffer}{object}
+	object.count \GETS 2\\
+	object.block.liveCount \GETS object.block.liveCount + 1
+	\RETURN{}\\
+\end{pseudocode}
+
+This method is slightly more complicated. The first case is if the object is not new, it first checks to make sure the count isn't at the max, and if it isn't just increment and continue. If it is at the max, just leave it alone (the counter is now considered broken, and must be fixed by the tracer eventually). If the object is new (ie has never been copied before) then we first copy it to a new location, allowing the initial block to be filled only with new objects. After that we add it to the ModBuffer (essentially a list of objects that were created since that last collection), then set it's counter to 2 (the original pointer, and this new pointer to it). The last statement increases the number of live objects on the block that it was moved to. Note that we don't need to update the original count, since it was originally considered dead.
+
+It's important to note that the weak generational hypothesis states that most objects die young\cite{rcimmix}[pg 5], which means most objects are not copied, and this method is never called on most objects. Therefore this method can afford to be slightly more expensive the first time it's called with a new object, which is why it's able to copy new objects without too much of a performance overhead. 
+
+Copying the newly created object means that the block it was allocated on contains only dead objects, and is easily reclaimed. It also moves older objects to blocks together, increasing cache performance.
+
+\subsubsection{Release}
+
+The last of the 3 methods the user(or the compiler) interacts with is the \code{Release} method, which is called whenever the pointer stops referring to the object.
+
+\begin{pseudocode}{Release}{object}
+	\IF object.new = \TRUE \THEN
+		\RETURN{}\\
+	object.count \GETS object.count - 1\\
+	\IF object.count = 0 \THEN
+	\BEGIN
+		\CALL{ProcessModBuffer}{}\\
+		object.block.liveCount \GETS object.block.liveCount - 1\\
+		\CALL{FreeBlocks}{}\\
+	\END
+\end{pseudocode}
+
+So this method starts out by seeing if this is a new object (hasn't been copied yet). If it is then \code{Release} method doesn't need to do anything, since objects are allocated as dead, so it's already dead. This greatly reduces performance since for the vast majority of objects, the release method is essentially free.
+
+Then it decrements the counter for the object (older objects only), and checks if the counter is now 0. If it is now 0, then it processes the ModBuffer (more details below), decrements the blocks liveCount (since there's now one less live object) and then checks for free blocks. Free blocks simply has to iterate over all the blocks, and if they have a 0 for live count, then it can mark them as free.
+
+These are the main 3 methods, but there are a few supplementary methods that these methods use, as outlined below:
+
+\subsubsection{Other methods}
+
+\begin{pseudocode}{AddToModBuffer}{object}
+	\GLOBAL{ModBuffer}\\
+	\CALL{ModBuffer.Push}{object}
+\end{pseudocode}
+
+Very simply method, just push it onto a stack (or into a list)
+
+\begin{pseudocode}{ProcessModBuffer}{none}
+	\GLOBAL{ModBuffer}\\
+	\FOREACH obj \in ModBuffer \DO
+	\BEGIN
+		FOREACH child \in obj.references \DO
+		\BEGIN
+			\IF child.new = \TRUE \THEN 
+			\BEGIN
+				\CALL{Retain}{child}
+				child.count \GETS 1
+			\END
+		\END
+	\END
+\end{pseudocode}
+
+This one is slightly more complicated. Basically for every object in \textbf{ModBuffer}, find all the things it refers to directly (it pointers in that object) and if they are, call retain on them, then reset their count to 1 (since we don't actually increase the count, we just want to make them live now). What this does is that after this method is done being called, any objects that were born dead, but are still alive (something still refers to them) are marked as alive now. 
+
+After this method executes, the only dead objects are the ones that are genuinely dead, so reclaiming free blocks is possible now.
+
+\begin{pseudocode}{Collect}{none}
+	\CALL{ProcessModBuffer}{}\\
+	\IF \CALL{FreeBlocks}{} = 0 \THEN
+		\CALL{Tracer}{}
+\end{pseudocode}
+
+The collector first processes the \textbf{ModBuffer} then it checks to see if it can reclaim any free blocks now. (This is the same \code{FreeBlocks} as described above, it's just required to return the number of blocks freed here). If it couldn't free any blocks, then the tracing garbage collector needs to be called. The tracer is a standard tracing garbage collector, the only extra thing is it must count the number of times each object is referred to. It does this by zero-ing all reference counts at the start (while it's setting the mark bit false), then incrementing each time it comes across one.
+
+\section{Conclusion}
+
+This is the RCImmix algorithm, which is a series of optimizations added to reference counting in order to make it competitive with tracing garbage collectors.
 
 
 \bibliographystyle{unsrt}
