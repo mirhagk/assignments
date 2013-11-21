@@ -39,7 +39,8 @@
 	\begin{itemize}
 		\item Introduction to automatic memory management
 		\item Problems with existing reference counting
-		\item The RCImmix algorithm
+		\item Optimizations to reference counting
+		\item RCImmix algorithm
 	\end{itemize}
 \end{frame}
 
@@ -63,6 +64,16 @@
 	\begin{itemize}
 		\item Counter keeps track of how many things are pointing to it
 		\item When counter reaches 0, free memory
+		\item \code{Allocate}, \code{Retain}, \code{Release}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Reference Counting vs Tracing}
+	\textbf{Tracing Garbage Collector:}
+	\begin{itemize}
+		\item Little work for allocation
+		\item Better cache performance (with compacting)
+		\item Requires pausing to collect
 	\end{itemize}
 \end{frame}
 
