@@ -4,7 +4,6 @@ module DSL where
 import Prelude hiding ((+),(*),(==))
 import qualified Prelude as P
 
-z = prettyPrint (1+2)
 data Expr = Null
   | Const Int
   | Var [Char]
