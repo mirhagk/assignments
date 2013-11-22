@@ -15,6 +15,7 @@
 \usepackage{pseudocode}
 \usepackage{listings}
 
+
 \title[RCImmix]{A Description of the RCImmix Algorithm}
 \subtitle[RC]{Reference Counting with better heap allocation}
 \author[N. Jervis]{Nathan Jervis}
@@ -164,7 +165,7 @@
 
 \addtocounter{section}{1}
 
-\begin{frame}
+\begin{frame}{Allocate}
 \begin{pseudocode}{Allocate}{size}
 	\GLOBAL{bumpPointer, block}\\\\
 	\IF size < block.end - bumpPointer \THEN
@@ -177,14 +178,14 @@
 			block \GETS \CALL{GetNewFreeBlock}{}\\
 			\RETURN{\CALL{Allocate}{size}}\\
 		\END\\\\
-	pointer.new \GETS \TRUE
-	pointer.count \GETS 0
+	pointer.new \GETS \TRUE\\
+	pointer.count \GETS 0\\
 	\RETURN{pointer}
 \end{pseudocode}
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}{Retain}
 \begin{pseudocode}{Retain}{object}
 	\IF object.new = \FALSE \THEN
 	\BEGIN
@@ -193,17 +194,18 @@
 		\RETURN{}
 	\END\\
 	pointer \GETS \CALL{CopyToNewLocation}{object}\\
-	\CALL{AddToModBuffer}{object}
+	\CALL{AddToModBuffer}{object}\\
 	object.count \GETS 2\\
-	object.block.liveCount \GETS object.block.liveCount + 1
+	object.block.liveCount \GETS object.block.liveCount + 1\\
 	\RETURN{}\\
 \end{pseudocode}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Release}
 \begin{pseudocode}{Release}{object}
 	\IF object.new = \TRUE \THEN
 		\RETURN{}\\
+	\IF object.count \NOT max \THEN
 	object.count \GETS object.count - 1\\
 	\IF object.count = 0 \THEN
 	\BEGIN
@@ -216,19 +218,16 @@
 
 \addtocounter{section}{1}
 
-\begin{frame}
+\begin{frame}{ModBuffer}
 \begin{pseudocode}{AddToModBuffer}{object}
 	\GLOBAL{ModBuffer}\\
 	\CALL{ModBuffer.Push}{object}
 \end{pseudocode}
-\end{frame}
-
-\begin{frame}
 \begin{pseudocode}{ProcessModBuffer}{none}
 	\GLOBAL{ModBuffer}\\
 	\FOREACH obj \in ModBuffer \DO
 	\BEGIN
-		FOREACH child \in obj.references \DO
+		\FOREACH child \in obj.references \DO
 		\BEGIN
 			\IF child.new = \TRUE \THEN 
 			\BEGIN
@@ -239,6 +238,24 @@
 	\END
 \end{pseudocode}
 \end{frame}
-	
+
+\renewcommand{\arraystretch}{2}
+\begin{frame}{Conclusion}
+	\begin{tabular}{p{3cm}|c|c|c}
+	 & Reference Counting & Tracing & RCImmix (Both)\\\hline
+	Overhead & Significant & None & Minimal\\
+	Speed & Slow & Fast & Fast\\
+	Cache \mbox{Performance} & Poor & Good & Good\\
+	Pauses & Short & Long & Mostly short\\
+	Implementation Difficulty & Easy & Hard & Very Hard
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{Resources}
+\bibliographystyle{unsrt}
+\nocite{rcimmix}
+\nocite{rc}
+\bibliography{JervisNathan_1211159_WA4}
+\end{frame}
 
 \end{document}
