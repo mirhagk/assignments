@@ -75,130 +75,18 @@
 		\item Better cache performance (with compacting)
 		\item Requires pausing to collect
 	\end{itemize}
-\end{frame}
-
-\begin{frame}{Tracing Garbage Collector}
-	\textbf{Pros:}
+	\textbf{Reference Counting:}
 	\begin{itemize}
-		\item Is lazy about collecting
-		\item Can detect and collect all forms of garbage
-		\item Can compact memory to improve cache performance
-	\end{itemize}
-	\textbf{Cons:}
-	\begin{itemize}
-		\item Requires pausing the program during collection
-		\item Needs complete control over the memory
+		\item Doesn't pause
+		\item Huge overhead
+		\item Poor cache locality
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Reference Counting}
-	\textbf{Pros:}
-	\begin{itemize}
-		\item Doesn't normally stall\footnote{Can still stall a bit if large chains are freed from a single decrement, ie with large linked lists}
-		\item Memory gets released at precise, defined times (as soon as they have no more references to them)
-	\end{itemize}
-	\textbf{Cons:}
-	\begin{itemize}
-		\item Poor locality (poor cache performance)
-		\item Increment/Decrement for all reference copying takes a non-insignificant amount of time.
-		\item Can't detect cycles
-	\end{itemize}
+\begin{frame}{RCImmix Optimizations}
+	\item Limited Bit Count
 \end{frame}
 
-
-\begin{frame}{Cycles}
-	\begin{center}
-		\includegraphics[width=75mm]{graphics/cycles.png}
-	\end{center}
-	\begin{itemize}
-		\item A points to B
-		\item B points to A
-		\item only way A reach 0 is if B reaches 0
-		\item since A points to B, B can't reach 0 until A does
-		\item Reference Counting can't collect this
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Initial Memory State}
-	\begin{center}
-		\includegraphics[width=\textwidth]{graphics/memState0.png}
-	\end{center}
-	\begin{itemize}
-		\item Includes one cycle
-		\item A is the root of the program %only one you have reference to
-	\end{itemize}
-\end{frame}
-\begin{frame}{Initial Memory State}
-	\begin{center}
-		\includegraphics[width=\textwidth]{graphics/memState1.png}
-	\end{center}
-	\begin{itemize}
-		\item A stops referring to 
-		\item  B now has no references to it, and dies
-	\end{itemize}
-\end{frame}
-\begin{frame}{Initial Memory State}
-	\begin{center}
-		\includegraphics[width=\textwidth]{graphics/memState2.png}
-	\end{center}
-	\begin{itemize}
-		\item B is freed, and decrements the references it's pointing to
-		\item D now has no references to it, and becomes dead
-	\end{itemize}
-\end{frame}
-\begin{frame}{Initial Memory State}
-	\begin{center}
-		\includegraphics[width=\textwidth]{graphics/memState3.png}
-	\end{center}
-	\begin{itemize}
-		\item D is freed, and decrements the references it's pointing to
-		\item But F still has G pointing to it, so it doesn't get freed
-		%Even though you can no longer access it
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Block Based Memory Allocation}
-	Normally memory allocation involves maintaining a list of all free locations and selecting one.\\
-	
-	Block based memory allocation can allocate memory within a block by simply incrementing a pointer. Example:\\
-	\begin{pseudocode}{BlockAllocate}{size}
-		\IF pointer + size < block.length \THEN 
-			\BEGIN
-				result \GETS pointer\\
-				pointer \GETS pointer + size\\
-			\END
-		\ELSE
-			\BEGIN
-				block \GETS \CALL{getFreeBlock}{}\\
-				pointer \GETS 0\\
-			\END
-	\end{pseudocode}
-\end{frame}
-
-\begin{frame}{Block Based Memory Allocation}
-	\begin{itemize}
-		\item With a large enough block size, the majority of calls will simply increment the pointer.
-		\item Avoids expensive free list walking
-		\item Also sequential calls to memory allocator will allocate memory sequentially (great for cache)
-		\pause
-		\item requires entire blocks to be free before any item can be used
-		\pause
-		\item Okay for tracing collector (can move objects)
-		\pause
-		\item Not usable for reference counting
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Ref. Counting Problems}
-	\textbf{Summary of problems with reference counting:}
-	\begin{itemize}
-		\item Increment/Decrement can take up non-trivial amounts of time
-		\item Allocation is much more expensive than tracing collectors
-		\item Poor cache performance (bad locality)
-		\item Can't detect cycles
-		\item Requires an entire word to store counter reliably (32 bits for every object on current machines)
-	\end{itemize}
-\end{frame}
 
 \begin{frame}{Introducing RCImmix}
 	\textbf{RCImmix - reference counting on steroids}
@@ -212,7 +100,6 @@
 \end{frame}
 
 \addtocounter{section}{1}
-%\section{RCImmix Description}%doesn't appear but used to correct section numbers
 
 \begin{frame}[fragile]
 \frametitle{RCImmix - How it works}
