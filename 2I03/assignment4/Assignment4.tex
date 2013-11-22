@@ -84,7 +84,29 @@
 \end{frame}
 
 \begin{frame}{RCImmix Optimizations}
-	\item Limited Bit Count
+	\textbf{Optimizations}
+	\begin{itemize}
+		\item Tracing collector as a backup
+		\item Limited Bit Count
+		\item Block Based allocation
+		\item Nursery Allocation and Copying Collectors
+		\item Objects are born as dead
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Tracing Backup Collector}
+	\begin{itemize}
+		\item Naive reference counting won't collect cycles
+		\item Reference counting handle normal memory collection
+		\item When cycle garbage accumulates too much, call Tracer
+		\item Tracer will very rarely be called, so you still don't have to worry about pauses too much
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Limited bit count}
+	\begin{itemize}
+		\item In theory every object could point to object, requires 32 bits (or 64)
+	\end{itemize}
 \end{frame}
 
 
