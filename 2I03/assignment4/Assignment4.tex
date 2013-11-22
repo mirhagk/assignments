@@ -105,68 +105,140 @@
 
 \begin{frame}{Limited bit count}
 	\begin{itemize}
-		\item In theory every object could point to object, requires 32 bits (or 64)
+		\item In theory everything could point to object, requires 32/64 bits
+		\item In practice most objects only a few things pointing to it
+		\item Using 3-4 bits is fine
+		\item If it overflows, just leave it at max, don't decrement
+		\item Tracer will fix it when it collects
 	\end{itemize}
 \end{frame}
 
-
-\begin{frame}{Introducing RCImmix}
-	\textbf{RCImmix - reference counting on steroids}
+\begin{frame}{Block Based Allocation}
 	\begin{itemize}
-		\item Builds upon serious of smaller optimizations
-		\item Can detect cycles
-		\item Can use block-based memory allocation
-		\item Much better cache performance
-		\item requires only a few bits to store counter (can even use existing space in object header)
+		\item Items are allocated out of a block
+		\item Block keeps a pointer to the next free spot
+		\item Count of number of live objects on the block
+		\item Great for cache performance
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Nurseries and Copying Collection}
+	\begin{itemize}
+		\item Objects are allocated into a nursery
+		\item Move when mature (copied or pass collection cycle)
+		\item Only new objects in nursery
+			\begin{itemize}
+				\item Will be collected during collection cycles
+				\item Most objects die young, not copied
+				\item Nurseries are cheap way to collect
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Objects are born as dead}
+	\begin{itemize}
+		\item When you create the object, garbage collector already considers it dead
+		\item Only when it moves or matures do you consider it alive
+		\item ModBuffer contains all objects that have created new objects
+		\item Can process ModBuffer to check if "dead" objects are actually alive
 	\end{itemize}
 \end{frame}
 
 \addtocounter{section}{1}
 
-\begin{frame}[fragile]
-\frametitle{RCImmix - How it works}
-	\begin{pseudocode}{Allocate}{size}
-	pointer.location \GETS \CALL{blockAllocate}{size}\\
-	pointer.count \GETS 1\\
+
+\begin{frame}{Typical Use}
+\begin{pseudocode}{User Code}{args}
+\MAIN
+	x \GETS \CALL{Allocate}{size}\\
+	\ldots\\
+	\CALL{Retain}{x}\\
+	y \GETS x\\
+	\ldots\\
+	\CALL{Release}{y}\\
+	\ldots\\
+	\CALL{release}{x}\\
+\ENDMAIN
+\end{pseudocode}
+\end{frame}
+
+\addtocounter{section}{1}
+
+\begin{frame}
+\begin{pseudocode}{Allocate}{size}
+	\GLOBAL{bumpPointer, block}\\\\
+	\IF size < block.end - bumpPointer \THEN
+		\BEGIN
+			pointer \GETS bumpPointer\\
+			bumpPointer \GETS bumpPointer + size + 1\\
+		\END\\
+	\ELSE
+		\BEGIN
+			block \GETS \CALL{GetNewFreeBlock}{}\\
+			\RETURN{\CALL{Allocate}{size}}\\
+		\END\\\\
+	pointer.new \GETS \TRUE
+	pointer.count \GETS 0
 	\RETURN{pointer}
-	\end{pseudocode}\\
-	Make sure each time it's copied call \texttt{Retain} and each time something stops referring to it call \texttt{Release}
+\end{pseudocode}
 \end{frame}
 
-\begin{frame}{RCImmix - How it works}
-	\begin{pseudocode}{Retain}{pointer}
-	\IF pointer \NOT max
-		\THEN pointer.count \GETS pointer.count + 1
-	\end{pseudocode}
-%	\begin{pseudocode}{Release}{pointer}
-		
-%	\end{pseduocode}
+
+\begin{frame}
+\begin{pseudocode}{Retain}{object}
+	\IF object.new = \FALSE \THEN
+	\BEGIN
+		\IF object.count \NOT max \THEN
+		object.count \GETS object.count + 1\\
+		\RETURN{}
+	\END\\
+	pointer \GETS \CALL{CopyToNewLocation}{object}\\
+	\CALL{AddToModBuffer}{object}
+	object.count \GETS 2\\
+	object.block.liveCount \GETS object.block.liveCount + 1
+	\RETURN{}\\
+\end{pseudocode}
 \end{frame}
 
-\begin{frame}{RCImmix - Cycle Collection}
-	\textbf{How RC Immix deals with Cycles}
-	\begin{itemize}
-		\item Don't worry about cycles
-		\item Will lead to unclaimed garbage
-		\pause
-		\item Backup tracing collector
-		\item Will eventually be discovered and collected
-	\end{itemize}
+\begin{frame}
+\begin{pseudocode}{Release}{object}
+	\IF object.new = \TRUE \THEN
+		\RETURN{}\\
+	object.count \GETS object.count - 1\\
+	\IF object.count = 0 \THEN
+	\BEGIN
+		\CALL{ProcessModBuffer}{}\\
+		object.block.liveCount \GETS object.block.liveCount - 1\\
+		\CALL{FreeBlocks}{}\\
+	\END
+\end{pseudocode}
 \end{frame}
 
-\begin{frame}{RCImmix - Smaller counter}
-	\begin{itemize}
-		\item In theory: Every possible memory location could point to one spot
-		\item In practice: Only a few things will ever point to it
-		\item 4 bits will work for most objects
-		\item If it reaches \texttt{1111} let it stay there
-		\item Again leads to garbage
-		\item Tracer will fix counter
-	\end{itemize}
+\addtocounter{section}{1}
+
+\begin{frame}
+\begin{pseudocode}{AddToModBuffer}{object}
+	\GLOBAL{ModBuffer}\\
+	\CALL{ModBuffer.Push}{object}
+\end{pseudocode}
 \end{frame}
 
-\begin{frame}{RCImmix - Better cache performance}
+\begin{frame}
+\begin{pseudocode}{ProcessModBuffer}{none}
+	\GLOBAL{ModBuffer}\\
+	\FOREACH obj \in ModBuffer \DO
+	\BEGIN
+		FOREACH child \in obj.references \DO
+		\BEGIN
+			\IF child.new = \TRUE \THEN 
+			\BEGIN
+				\CALL{Retain}{child}
+				child.count \GETS 1
+			\END
+		\END
+	\END
+\end{pseudocode}
+\end{frame}
 	
-\end{frame}
 
 \end{document}
