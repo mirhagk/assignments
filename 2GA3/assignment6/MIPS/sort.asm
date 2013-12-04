@@ -18,9 +18,8 @@ findMaxIndex_while:
 	slt $t4, $t2, $a0 #i < k
 	beq $t4, $zero, findMaxIndex_endWhile #while (i<k)
 	lw $t4, 0($t3) #load A[i]
-	slt $t5, $t4, $t0 #A[i] > m
-	beq $t5, $zero, findMaxIndex_if #if (A[i]>m) do this part
-	j findMaxIndex_endIf
+	slt $t5, $t0, $t4 #A[i] > m, or rather m < A[i]
+	beq $t5, $zero, findMaxIndex_endIf #if (A[i]>m) do this part
 findMaxIndex_if:
 	ori $t0, $t4, 0 #m = A[i]
 	ori $t1, $t2, 0 #im = i
@@ -29,12 +28,6 @@ findMaxIndex_endIf:
 	addi $t3, $t3, 4 #update &(A[i])
 	j findMaxIndex_while
 findMaxIndex_endWhile:
-	li $v0, 4
-	la $a0, debugFindMaxIndex
-	syscall
-	li $v0, 1
-	ori $a0, $t1, 0
-	syscall
 	ori $v0, $t1, 0
 	jr $ra
 	
@@ -52,14 +45,6 @@ swap:
 	lw $t1, 0($a1) #load A[j]
 	sw $t1, 0($a0) #A[i] = A[j]
 	sw $t0, 0($a1) #A[j] = h
-	li $v0, 4
-	la $a0, debugSwap
-	syscall
-	li $v0, 1
-	ori $a0, $t1, 0
-	syscall
-	ori $a0, $t0, 0
-	syscall
 	jr $ra
 
 #####
@@ -72,37 +57,38 @@ swap:
 #	s3 = 1
 # *NOTE*: j is optimized away as k can simply be used
 sort:
-	addi $sp, $sp, -16
-	sw $ra, 12($sp)
-	sw $s2, 8($sp)
+	addi $sp, $sp, -12
+	sw $ra, 8($sp)
 	sw $s1, 4($sp)
 	sw $s0, 0($sp)
 	ori $s0, $a0, 0
 	ori $s1, $a1, 0
-	ori $s3, $zero, 1
 sort_while:
-	beq $s0, $s3, sort_end
-	ori $a0, $s0, 0
-	ori $a1, $s1, 0
+	ori $t0, $zero, 1
+	slt $t0, $t0, $s0 #j>1
+	beq $t0, $zero, sort_end #if not exit while loop
+	ori $a0, $s0, 0 #prep function call, j is first argument
+	ori $a1, $s1, 0 #prep function call, A is second argument
 	jal findMaxIndex #findMaxIndex(j,A)
-	ori $s2, $v0, 0
 	addi $s0, $s0, -1 #j--
-	slt $t0, $s2, $s0
-	beq $t0, $zero, sort_while
-	ori $a0, $s2, 0
+	slt $t0, $v0, $s0 #im < j
+	beq $t0, $zero, sort_while #if not go back to top of loop
+	ori $a0, $v0, 0
 	ori $a1, $s0, 0
 	ori $a2, $s1, 0
 	jal swap
 	j sort_while
 sort_end:
-	lw $ra, 12($sp)
-	addi $sp, $sp, 16
+	lw $ra, 8($sp)
+	lw $s1, 4($sp)
+	lw $s0, 0($sp)
+	addi $sp, $sp, 12
 	jr $ra
 	
 
 .data
-k: .word 5
-A: .word 2,3,5,4,1
+k: .word 10
+A: .word 2,3,5,4,1,9,7,8,6,0
 debugSwap: .asciiz "\nSwapping "
 debugFindMaxIndex: .asciiz "\nFound max index at"
 
