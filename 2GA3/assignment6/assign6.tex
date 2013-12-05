@@ -37,7 +37,7 @@
 \newcommand{\nth}{$^{\text{th}\ }$}
 
 \title{Assignment 6}
-\author{Nathan Jervis}
+\author{Nathan Jervis - 1211159}
 
 \begin{document}
 \maketitle
@@ -102,5 +102,16 @@ Average Miss Penalty & 6.4 & 4.8 & 3.2 & 2.8 & 2.56 \\\hline
 The best block size for this penalty is 256
 
 \section{Question 6.3}
+
+
+\includegraphics[width=\textwidth]{CPU.png}
+
+We add a multiplexer to choose this 3\rd read register to read as the address. The 3\rd read register is selected by simply re-using the Write Register that is selected. Then the result of the memory load is moved to select between that and the immediate address. This is then selected between this and the regular program counter, based on the branch control bit and the zero of the ALU anded together.
+
+\section{Question 6.4}
+
+Submitted via avenue
+
+
 \end{document}
 

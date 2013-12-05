@@ -83,18 +83,51 @@ sort_end:
 	lw $s0, 0($sp)
 	addi $sp, $sp, 12
 	jr $ra
+
+	
+#####
+# OutArray(int k,int A[]), requires k>0
+#####
+# Outputs an array
+outArray:
+	ori $t0, $a0, 0
+outArray_loop:
+	beq $t0, $zero, outArray_end
+	li $v0, 1
+	lw $a0, 0($a1)
+	syscall
+	li $v0, 11
+	li $a0, ' '
+	syscall
+	addi $a1, $a1, 4
+	addi $t0, $t0, -1
+	j outArray_loop
+outArray_end:
+	li $v0, 11
+	li $a0, '\n'
+	syscall
+	jr $ra
 	
 
 .data
 k: .word 10
 A: .word 2,3,5,4,1,9,7,8,6,0
-debugSwap: .asciiz "\nSwapping "
-debugFindMaxIndex: .asciiz "\nFound max index at"
 
 .text
-main:
-	lw $a0, k
-	la $a1, A
+main: #doesn't need to save variables since it's main
+	lw $s0, k
+	la $s1, A
+	ori $a0, $s0, 0
+	ori $a1, $s1, 0
+	jal outArray
+	
+	ori $a0, $s0, 0
+	ori $a1, $s1, 0
 	jal sort
+	
+	ori $a0, $s0, 0
+	ori $a1, $s1, 0
+	jal outArray
+	
         li $v0, 10  # system call code for exit = 10
         syscall   # call operating sys
