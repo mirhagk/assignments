@@ -5,12 +5,12 @@ j main
 #####
 #locals:
 #	t0 = m
-#	t1 = im
+#	v0 = im (since it's the return value
 #	t2 = i
 #	t3 = &(A[i]) (for optimization purposes)
 findMaxIndex:
 	lw $t0, 0($a1) #int m = A[0]
-	ori $t1, $zero, 0 #im = 0
+	ori $v0, $zero, 0 #im = 0
 	ori $t2, $zero, 1 #i = 1
 	sll $t3, $t2, 2 #t3 = i*4
 	add $t3, $t3, $a1 #t3 = A[i]
@@ -20,15 +20,13 @@ findMaxIndex_while:
 	lw $t4, 0($t3) #load A[i]
 	slt $t5, $t0, $t4 #A[i] > m, or rather m < A[i]
 	beq $t5, $zero, findMaxIndex_endIf #if (A[i]>m) do this part
-findMaxIndex_if:
 	ori $t0, $t4, 0 #m = A[i]
-	ori $t1, $t2, 0 #im = i
+	ori $v0, $t2, 0 #im = i
 findMaxIndex_endIf:
 	addi $t2, $t2, 1 #i++
 	addi $t3, $t3, 4 #update &(A[i])
 	j findMaxIndex_while
 findMaxIndex_endWhile:
-	ori $v0, $t1, 0
 	jr $ra
 	
 #####
@@ -51,11 +49,12 @@ swap:
 # void sort(int k, int A[])
 #####
 #locals:
-#	s0 = k/j (just modify k instead of creating new local)
+#	s0 = j (just modify k instead of creating new local)
 #	s1 = A
-#	s2 = im
+#	v0 = im (the return register is used after the call to findMaxIndex
+#		this is possible since we don't need to preserve it's value across the loop iterations, ie across any function calls)
 #	s3 = 1
-# *NOTE*: j is optimized away as k can simply be used
+# *NOTE*: k is not saved, since it's not needed after being assigned to j
 sort:
 	addi $sp, $sp, -12
 	sw $ra, 8($sp)
