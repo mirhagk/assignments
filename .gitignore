@@ -6,6 +6,7 @@
 *.aux
 *.pdf
 *.bbl
+*.out
 *.blg
 *.synctex.gz
 
