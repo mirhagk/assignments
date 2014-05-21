@@ -4,7 +4,7 @@
 
 *.nav
 *.aux
-*.pdf
+#*.pdf
 *.bbl
 *.out
 *.blg
