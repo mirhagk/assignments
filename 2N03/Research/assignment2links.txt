@@ -1,11 +1,39 @@
-http://www.cbc.ca/news/canada/toronto/widespread-price-fixing-alleged-in-toronto-home-construction-1.1316667
+Summary
+---
 
+Unions can be formed by contractors for the sake of support, licensing, awareness etc, but not for the purpose of negotiation. Basically you can't get together with other contractors and demand more money from your company.
+
+Links
+---
+
+http://employment.findlaw.com/hiring-process/being-an-independent-contractor-vs-employee.html
+http://vfx.iatse-intl.org/employee-vs-independent-contractor/
+http://www.ecao.org/aboutUs.asp
+http://www.ecao.org/Faq.asp?categoryId=1#48 (Price Suggestion)
+http://www.canadamasonrycentre.com/omca/
+http://www.ceca.org/
+http://www.mcac.ca/
+
+
+Examples of price fixing
+----
+
+http://www.cbc.ca/news/canada/toronto/widespread-price-fixing-alleged-in-toronto-home-construction-1.1316667
 https://en.wikipedia.org/wiki/Price_fixing_cases
 http://www.dcnonl.com/article/id58746/--competition-bureau-ends-concrete-price-fixing-investigation
-http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/h_00129.html
-http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/h_03700.html
-http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/vwapj/Little-Black-Book-Scams-e.pdf/$FILE/Little-Black-Book-Scams-e.pdf
-http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/01863.html
-http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/03388.html
+
+Competition Bureau useful pages
+---
+Complain Criteria - http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/h_00129.html 
+Corporate Compliance Program (video) - http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/h_03700.html 
+Little Black Book of scams (various scams to look out for) http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/vwapj/Little-Black-Book-Scams-e.pdf/$FILE/Little-Black-Book-Scams-e.pdf 
+Cases and penalties - http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/01863.html
+Sewer Services Cartel - Several sewer cleaning companies got together and pre-selected who should win which contract, and submit bids based on that (with chosen prices) - 
 http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/03430.html
-http://www.laws.justice.gc.ca/eng/acts/C-34/page-27.html#h-20 -offences relating to competition
+Competition Act - Section 45 - (conspiracy, ie price fixing) - http://www.laws.justice.gc.ca/eng/acts/C-34/page-27.html#h-20
+
+
+Competition Act Notes
+---
+
+Of interest in section 45.3 makes it clear that the court can use circumstantial evidence, not just concrete evidence that a conversation actually happened
