@@ -25,20 +25,22 @@ Edward\cite{baitSwitch} has laid out conditions for an equilibrium in which bait
 
 In order to detemine the exact conditions in which a bait and switch equilibrium is created, we can use 3 equations. Assume that $W$ is the wealth of the customer, $A$ is the i7 HP, $B$ is the i3 HP, and $P_A, P_B$ are the prices of $A$ and $B$ respectively. $k$ is the search cost, which in this scenario is the cost of coming to the store, in both time (opportunity cost) and gas (real cost). $V()$ is a function which evaluates the value of a good, or a sum of money (assuming it can be spent on an alternate good), for a particular consumer.
 
-\begin{equation}
-	V(W) \explain{Value of not shopping for either laptop}
-\end{equation}
-\begin{equation}
-	V(A) + V(W-P_A - k) \explain{Value of buying the i7}
-\end{equation}
-\begin{equation}
-	V(B) + V(W-P_B - k) \explain{Value of buying the i3}
-\end{equation}
-\begin{equation}
+\begin{align}
+	V(W) \explain{Value of not shopping for either laptop}\\
+	V(A) + V(W-P_A - k) \explain{Value of buying the i7}\\
+	V(B) + V(W-P_B - k) \explain{Value of buying the i3}\\
 	V(W-k) \explain{Value of shopping, then not buying}
-\end{equation}
+\end{align}
 
+A consumer would only drive to the store for the i7 if $(2) > (1)$. Since the store actually avertised $B$, consumers who are at the store are the ones where $(3)>(1)$. The ones who end up purchasing the i7 are the ones where $(2)>(4)$.
 
+\begin{align}
+	V(B)+V(W-P_B-k) &> V(W)\\
+	V(A)+V(W-P_A-k) &> V(W-k)\\
+	V(B)+V(-P_B-k) &> V(0)\\
+	V(A)+V(-P_A) &> V(0)
+\end{align}
+$(7)$ and $(8)$ are just $(5)$ and $(6)$ simplified.\footnote{Note that they can only be simplified this way if V(N)*2 = V(N*2), that is \$2 is twice as valuable as \$1}
 
 What Rebecca is proposing in this scenario is price fixing. Canadian law is quite clear on the subject: \cite[45.1.a]{compAct}
 
