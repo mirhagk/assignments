@@ -1,0 +1,112 @@
+\documentclass[12pt]{article}
+%\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage[margin=1.0in]{geometry}
+
+\title{\vspace{-3.5cm}Econ 2N03 - Problem 3\\It isn't worth it}
+
+\author{Nathan Jervis - 1211159}
+
+\newcommand\act[1]{\textbf{#1}}
+\newcommand\bold[1]{\textbf{#1}}
+\newcommand\explain[1]{\text{  --  #1}}
+\long\def\/*#1*/{}
+
+\begin{document}
+
+\maketitle
+
+%\vspace{-1.2cm}
+
+The HP EliteBook Folio is a vastly overpriced laptop. This can be determined by observing Everything Computers actions.
+
+Edward\cite{baitSwitch} has laid out conditions for an equilibrium in which bait and switch tactics are employed by sellers. One important condition is that more people want the i3 HPs priced at \$400 than the i7 HPs priced at \$1500.\cite[pg. 818]{baitSwitch}. This gives us a clear picture of the market, and the comparatively lackluster demand for the i7 HPs.
+
+In order to detemine the exact conditions in which a bait and switch equilibrium is created, we can use 3 equations. Assume that $W$ is the wealth of the customer, $A$ is the i7 HP, $B$ is the i3 HP, and $P_A, P_B$ are the prices of $A$ and $B$ respectively. $k$ is the search cost, which in this scenario is the cost of coming to the store, in both time (opportunity cost) and gas (real cost). $V()$ is a function which evaluates the value of a good, or a sum of money (assuming it can be spent on an alternate good), for a particular consumer.
+
+\begin{equation}
+	V(W) \explain{Value of not shopping for either laptop}
+\end{equation}
+\begin{equation}
+	V(A) + V(W-P_A - k) \explain{Value of buying the i7}
+\end{equation}
+\begin{equation}
+	V(B) + V(W-P_B - k) \explain{Value of buying the i3}
+\end{equation}
+\begin{equation}
+	V(W-k) \explain{Value of shopping, then not buying}
+\end{equation}
+
+
+
+What Rebecca is proposing in this scenario is price fixing. Canadian law is quite clear on the subject: \cite[45.1.a]{compAct}
+
+\begin{quotation}
+Every person commits an offence who, with a competitor of that person with respect to a product, conspires, agrees or arranges to fix, maintain, increase or control the price for the supply of the product;
+\end{quotation}
+
+In this situation, Rebecca is approaching Sharon stating that if Sharon agrees, Rebecca will fix her prices at the current level. If Sharon agrees, then the two companies join a cartel, and reap the benefits assoicated with monopolies.
+
+McAfee and McMillian\cite[pg. 1]{biddingRings} argue that any successful cartel has 4 obstacles to overcome. 
+
+\begin{enumerate}
+\item A way to divvy up the spoils (choose who get which contracts)
+\item A way to enforce the agreement (contracts aren't possible due to it being illegal, so another means must be discovered)
+\item A way to prevent new firms from joining (high profits means that it's a more attractive business to new companies)
+\item A way to prevent the victims from stopping the cartel
+\end{enumerate}
+
+If Sharon was to agree to the deal, these 4 obstacles must be overcome. The third obstacle is the difficult one to overcome in this scenario. In order to maintain the cartel, new companies must be prevented from joining the industry. Cleaning services are a relatively easy industry to enter. Anyone can pick up some cleaning supplies and create a company. This makes it very difficult to ensure that new firms don't enter the market, or join in with the cartel.
+
+If Sharon is indeed smart as Rebecca states, then she would realize that such an agreement would be unlikely to be very successful.
+
+The best strategy for Sharon to do at this point is to report Rebecca to the competition bureau. The competition bureau provides an immunity \cite{immunity} to the first party that comes forward in a cartel. Sharon could choose to agree with Rebecca, and then report her once more evidence is gathered, or she could report her right away, because conspiracy to commit price fixing is a criminal offense.\cite[45.1.a]{compAct}
+
+By doing this, Rebecca's company will recieve a fine. Using the fine individual gasonline retailers received as an estimate, the fine may be in the \$15 000  range.\cite[2013]{penalties} With Rebecca's already worried about her job, this additional fine may be enough to shut down the company. Taking down competition while following the law, Sharon's got a great opportunity.
+
+\begin{thebibliography}{1}
+
+  \bibitem{compAct}
+\bold{Competition Act}\\
+Canadian Government\\
+R.S.C., 1985, c. C-34\\
+URL: http://www.laws.justice.gc.ca/eng/acts/C-34/page-27.html\#h-20
+
+  \bibitem{biddingRings}
+
+\bold{Bidding Rings}\\
+R. Preston McAfee and John McMillan\\
+The American Economic Review, Vol. 82, No. 3 (Jun., 1992), pp. 579-599\\
+Published by: American Economic Association\\
+Article Stable URL: http://www.jstor.org/stable/2117323
+
+  \bibitem{immunity}
+\bold{Immunity Program}\\
+Competition Bureau\\
+Date Modified: 2011-10-04\\
+URL: http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/h\_02000.html
+
+  \bibitem{penalties}
+\bold{Penalties Imposed by the Courts}\\
+Competition Bureau\\
+2013\\
+URL: http://www.competitionbureau.gc.ca/eic/site/cb-bc.nsf/eng/01863.html\#tab2013
+\/*
+  \bibitem{breakdown}
+\bold{The Future of World Oil}\\
+Paul Eckbo
+Cambridge, MA: Ballinger, 19761976
+*/
+
+\bibitem{baitSwitch}
+\bold{Bait And Switch}\\
+Lazear, Edward P\\
+The University of Chicago Press\\
+Journal of Political Economy\\
+Vol. 103, No. 4, Aug., 1995\\
+Stable URL: http://www.jstor.org/stable/2138583
+
+  \end{thebibliography}
+
+\end{document}
