@@ -1,0 +1,335 @@
+/* Header elements */
+
+.parlwebsite-header
+{
+	max-width: 960px;
+	margin: 0px auto;
+	width: 100%;
+	/*float:left;*/
+	padding: 0px;
+	/*margin-bottom: 10px; */
+	font-size:medium !important;
+	font-family: Verdana, Arial, Helvetica, sans-serif !important;
+	display:block;
+	/*height:140px;*/
+	overflow:hidden;
+}
+
+.parlwebsite-homeimage
+{
+	display: block;
+	height: 71px;
+	width: 110px; 
+	background: url("../Images/ParliamentHome.gif") no-repeat !important;
+}
+
+.parlwebsite-homeimage div 
+{
+	display:none;
+}
+
+.parlwebsite-header-title {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 1.7em;
+	color: #555;
+	float: left;
+	margin-top: 42px;
+	padding-left: 5px;
+}
+
+.parlwebsite-utility-links 
+{
+    /*float:right;*/
+	text-align: right;
+	color: #999 !important;
+	padding: 5px;
+	margin-top: 8px;
+	margin-right: 5px;
+	background-color: #fff;
+}
+
+.parlwebsite-utility-links a {
+	font-size: small !important;
+	font-family: Arial, Verdana, Geneva, sans-serif !important;
+	color:#333 !important;
+	text-decoration:none !important;
+}
+.parlwebsite-utility-links a:hover, .parlwebsite-utility-links a:active, .parlwebsite-utility-links a:focus {
+	text-decoration: underline !important;
+	color: #000 !important;
+}
+
+.parlwebsite-nav a /*, .parlwebsite-nav a:visited*/
+{
+	font-size: 80%!important;
+	font-family: Georgia, "Times New Roman", Times, serif !important;
+	color:#333 !important ;
+	background-color: #e0e0e0;
+	text-decoration:none !important;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 9px;
+	border-right: solid #fff 1px;
+	border-left: solid #fff 1px;
+	border-top: solid 2px #fff;
+	border-bottom: solid 2px #fff;
+	float: left;
+	width: 168px;
+	/*margin-top: 2px;*/
+	/*margin-bottom: 2px; Removed to fix IE7 issue*/
+}
+
+.parlwebsite-nav a:hover, .parlwebsite-nav a:active, .parlwebsite-nav a:focus {
+	text-decoration: none !important; 
+	color: #fff !important;
+	background-color: #666!important;
+}
+
+.parlwebsite-nav .mainLinksActive 
+{
+    text-decoration: none !important; 
+	color: #ffffff !important;
+	background-color: #666!important;
+}
+
+.parlwebsite-nav .mainLinksActiveHome 
+{
+    text-decoration: none !important; 
+	color: #ffffff !important;
+	background-color: #666!important;
+	width: 138px;
+	border-left: none;
+}
+
+.parlwebsite-nav .mainLinksActiveHomeFr 
+{
+    text-decoration: none !important; 
+	color: #ffffff !important;
+	background-color: #666!important;
+	width: 141px;
+	border-left: none;
+}
+
+.parlwebsite-nav .mainLinksActiveEmployment
+{
+    text-decoration: none !important; 
+	color: #ffffff !important;
+	background-color: #666!important;
+	width: 140px;
+	border-right: none;
+}
+
+.parlwebsite-nav .mainLinksActiveEmploymentFr
+{
+    text-decoration: none !important; 
+	color: #ffffff !important;
+	background-color: #666!important;
+	width: 137px;
+	border-right: none;
+}
+
+ a.parlwebsite-home-link-en{
+	width: 138px;
+	border-left: none;
+	
+	
+}
+a.parlwebsite-employment-link-en {
+	width: 140px;
+	border-right: none;
+}
+a.parlwebsite-home-link-fr {
+	width: 140px;
+}
+a.parlwebsite-employment-link-fr {
+	width: 137px;
+	border-right: none;
+}
+
+.parlwebsite-logo-area 
+{
+	float:left; 
+	padding-bottom: 10px;
+}
+
+.parlwebsite-nav 
+{
+	/*background-color: #e0e0e0;*/
+	width: 960px;
+	float:left;
+	border-top: solid 2px #e0e0e0;
+	border-bottom: solid 2px #e0e0e0;
+}
+
+/* Begin Sharebar */
+.parlwebsite-sharebar
+{
+	float: right;
+	padding-right: 4px;
+	margin-top: 0;
+	color: #666666;	
+}
+.parlwebsite-sharebar a
+{
+	width: 11px;
+	margin-top: 8px;
+	margin-left: 6px;
+}
+
+/* Prevent white title Bookmark & share PT 29391 */
+#at15ptc
+{
+    color: Black;
+}
+
+/* Prevent black background when sharebar items are selected PT 29390 */
+#at16lb
+{
+	background: transparent !important;
+}
+
+/* Standardize font style for Bookmark & Share window PT 29621 */
+#at16pt h4 
+{
+    font-size: 12px;
+    font-weight: normal;
+    color: #4C4C4C;
+    cursor: default;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* End Sharebar */
+
+/* Begin Google Search CSS for javascript version */
+.parlwebsite-search-area-js
+{
+	float:right;
+	width: 280px;
+	margin-top: 8px;        
+	margin-right: 5px;
+	text-align:right;
+	color: #999;
+}
+
+.parlwebsite-search-area-js table.gsc-search-box td.gsc-input
+{
+	padding-right: 0;	
+}
+
+.parlwebsite-search-area-js input.gsc-input 
+{
+    width: 209px;
+	max-width: 209px;
+	vertical-align: middle;
+	line-height: 1.3em;
+	height: 1.3em;
+	padding:1px 0px 1px 3px;
+}
+
+.parlwebsite-search-area-js input.gsc-search-button
+{
+	width: 62px;
+}
+
+.parlwebsite-search-area-js-fr
+{
+	width: 303px;
+}
+
+.parlwebsite-search-area-js-fr input.gsc-search-button
+{
+	width:85px;
+}
+/* End Google Search CSS for javascript version */
+
+/* Begin Search box when javascript is disabled */
+.parlwebsite-search-area
+{
+	float:right;
+	min-width: 240px;
+	width: 30%; 
+	margin-top: 8px;
+	padding-right: 5px;
+	text-align:right;
+	color: #999;
+}
+
+.parlwebsite-search-area input
+{
+	margin-left: 4px;
+}
+
+.parlwebsite-search-area input[type=text]
+{
+	max-width: 209px;
+	padding:1px 0px 1px 3px;
+}
+/* End Search box when javascript is disabled */
+
+/* Footer Elements */
+.parlwebsite-footer
+{
+	background-color: #ededed;
+	border-top: 1px solid #969696;
+	clear: both;
+	color:#555;
+	font: Small Verdana, Arial, Helvetica, sans-serif !important;
+	margin: 10px auto 0 auto;
+	padding: 5px;
+	text-align: left;
+	width: 948px;
+}
+
+.parlwebsite-footer-left 
+{ 
+	float: left; 
+	margin-left: 10px; 
+	text-align: left;
+	width: 240px; 
+}
+
+.parlwebsite-footer-center 
+{ 
+	float:left; 
+	margin-left: 10px; 
+	text-align:center;
+	width: 240px; 
+}
+
+.parlwebsite-footer-right 
+{ 
+	float: right; 
+	margin-left: 10px; 
+	text-align: right;
+	width: 240px; 
+}
+
+.parlwebsite-footer a, .parlwebsite-footer a:visited
+{
+	background: transparent !important;
+	border: none !important;
+	color: #333 !important;
+	font: Small Verdana, Arial, Helvetica, sans-serif !important;
+	margin: 0px !important;
+	padding: 8px !important;
+	position: static !important;
+	outline: none !important;
+	text-decoration:none !important;
+	text-align: left !important;
+	white-space: nowrap;
+}
+
+.parlwebsite-footer a:hover, .parlwebsite-footer a:active, .parlwebsite-footer a:focus
+{
+	background: transparent !important;
+	border: none !important;
+	color: #333 !important;
+	font: bold 90% !important;
+	margin: 0px !important;
+	padding: 8px !important;
+	position: static !important;
+	outline: none !important;
+	text-decoration:underline !important;
+	text-align: left !important;
+	white-space: nowrap;
+}

@@ -1,0 +1,183 @@
+ol, ul, li
+{
+	padding:0px;
+	margin:0px;
+}
+
+ul.Bullet30
+{
+	margin-left:30px;
+}
+
+ul.committeeList
+{
+	margin-left:0px;
+}
+ol.committeeReport
+{
+	margin-left:15px;
+}
+li
+{
+	background-image:none;
+}
+
+a.LeftMenu
+{
+	font-size: 10px;
+	text-align: center;
+	color: #555555;
+}
+
+table.main 
+{
+	width: 960px;
+	border: 0px;
+	padding: 0px;
+	border-spacing: 0px;
+}
+
+div.main 
+{
+	width: 960px;
+	border: 0px;
+	padding: 0px;
+	border-spacing: 0px;
+	margin-left: auto ;
+	margin-right: auto ;
+}
+
+td.justify
+{
+	text-align: justify;
+}
+
+p.right
+{
+	text-align: right;
+}
+
+p.center
+{
+	text-align: center;
+}
+
+h3{
+	color: #000000;
+	font-family: Arial, Verdana, Geneva, sans-serif;
+}
+
+.redTitle{
+	color: #A81338;
+	font-weight: bold;
+}
+
+.red, a.LeftMenu:active
+{
+	color: #A81338;
+}
+
+p.LargeTitle
+{
+	font-size: 50px;
+	text-align: center;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+
+a.LeftMenu:visited  
+{
+	font-weight: normal;
+}
+
+a.LeftMenu:hover, a.LeftMenu:active, a.LeftMenu:focus
+{
+	text-decoration: none;
+	font-weight: bold;	
+}
+
+a:visited 
+{
+	color:#993300;
+}
+
+a 
+{
+	color: #0000ff;
+	text-decoration: none;
+}
+
+p,  li, td, a.bookmark
+{
+	color: #000000;
+	font-size: 14px;
+	font-family: Arial, Verdana, Geneva, sans-serif;
+	
+}
+
+/* General Elements 
+html 
+{
+	overflow-y: scroll; 
+	overflow: -moz-scrollbars-vertical; 
+}
+
+body 
+{
+	background-color: #ffffff;
+	font: Small Arial, Verdana, Geneva, sans-serif;
+	margin: 0 auto;
+	width: 960px;
+}
+
+p
+{
+font: Small Arial, Verdana, Geneva, sans-serif;
+}
+
+a 
+{
+	font: Small Arial, Verdana, Geneva, sans-serif;
+	color: #0000ff;
+	text-decoration: none;
+}
+
+a:hover, a:active, a:focus 
+{
+	color: #cc0000;
+	text-decoration: underline;
+}
+
+a:visited 
+{
+	color:#909
+}
+
+a img 
+{
+	border:0px;
+}
+
+h1, h2, h3, h4, h5, h6 
+
+{
+	font-family: Georgia, Times New Roman, Times, serif;
+	font-weight: lighter;
+}
+
+
+.parlwebsite-inactive 
+{ 
+	color: #666666;
+	font-style:italic;
+}
+
+.parlwebsite-box h2, h3, h4, h5, h6 
+{
+	margin-bottom: 5px;
+}
+
+*/

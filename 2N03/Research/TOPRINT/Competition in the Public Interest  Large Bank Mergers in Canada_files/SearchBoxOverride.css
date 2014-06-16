@@ -1,0 +1,87 @@
+﻿/***********************************************************************
+ User Defined CSS - Overrides CSS in Google generated html code
+************************************************************************/
+
+/* removes google branding in text box */
+.gsc-input input.gsc-input 
+{
+    background: none repeat scroll 0% 0% white !important;
+}
+
+.cse .gsc-branding, .gsc-branding 
+{
+    display: none;
+}
+
+/* Remove Clear Results Button (x) */
+td.gsc-clear-button  
+{ 
+    display: none !important;
+}
+
+/* Ensure auto complete pop up is above everything else */
+.gsc-completion-container
+{
+    z-index: 100000000;		
+}
+
+/* keep autocomplete width the same size as the input box */
+.gssb_a, .gssb_a td 
+{
+	white-space: normal !important;
+	line-height: normal !important;
+}
+
+/* prevent spacing between input box and autocomplete in IE8 (Compatibility Mode) when tabbing */
+.gssb_c
+{
+   table-layout: fixed;
+}
+
+/* Autocomplete text */
+.gsc-completion-container td
+{
+	color: black;
+	font-size: 13px;
+	padding-bottom: 6px; /* in between each autocomplete result */
+}
+
+/* Search bar div and table overrides on search results page */
+.searchBox div
+{
+    width:503px;
+}
+.searchBox table.gsc-search-box
+{
+    width:auto;
+}
+
+/* input box overrides on search results page */
+.searchBox table.gsc-search-box td.gsc-input
+{
+	padding-right: 0px;
+	width:416px;
+}
+
+.searchBox input.gsc-input
+{
+	width: 408px;
+	max-width: 408px;
+	min-width: 408px;
+	padding:1px 0px 1px 3px;
+}
+
+/* search button overrides for search results page */
+.searchBox table.gsc-search-box td.gsc-search-button
+{
+    width:87px;
+}
+.searchBox input.gsc-search-button
+{
+	width: 62px; /* english "Search" button */
+}
+
+.searchBox  .gsc-control-searchbox-only-fr input.gsc-search-button
+{
+	width: 85px; /* french "Rechercher" button */
+}
