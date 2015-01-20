@@ -12,12 +12,13 @@ public class Main {
         //PrintSameNums(nums1,nums2);
 
         //int[] nums = new int[]{-100,-14,-6,-3,1,2,3,4,5,6,16,17,100,102};
-        int[] nums = new int[]{-5,-4,-3,1,2,3,4,5,7,9,10};
+        int[] nums = new int[]{2,3,4,5,7,9,10,5,4,3,1};
+
         //System.out.println(TwoSumFaster(nums));
         //System.out.println(ThreeSumFaster(nums));
 
 
-        FarthestPair(new double[]{-1.0,-5.0,1.0,5,100,4,-4});
+        //FarthestPair(new double[]{-1.0,-5.0,1.0,5,100,4,-4});
         return;
 
 	// write your code here
@@ -31,6 +32,32 @@ public class Main {
 //            System.out.print(i);
 //        }
         //StdOut.println("(");*/
+    }
+    // find the index of the maximum in a bitonic subarray a[lo..hi]
+    public static int max(int[] a, int lo, int hi) {
+        if (hi == lo) return hi;
+        int mid = lo + (hi - lo) / 2;
+        if (a[mid] < a[mid + 1]) return max(a, mid+1, hi);
+        if (a[mid] > a[mid + 1]) return max(a, lo, mid);
+        else return mid;
+    }
+    public static int bitronicMax(int[] nums, int low, int high){
+        if (low==high)
+            return high;
+        int middle = low + (high - low)/2;
+        if (nums[middle] < nums[middle+1])
+            return max(nums,middle+1,high);
+        if (nums[middle]>nums[middle+1])
+            return max(nums,low,middle);
+        return middle;
+    }
+    public static boolean binaryFind(int[] nums, int low, int high, int target){
+        if (high==low){
+            return nums[low]==target;
+        }
+    }
+    public static int bitronicFind(int[] nums, int low, int high){
+        int middle = bitronicMax(nums,low,high);
     }
     public static int TwoSumFaster(int[] nums){
         int total = 0;
