@@ -52,12 +52,20 @@ public class Main {
         return middle;
     }
     public static boolean binaryFind(int[] nums, int low, int high, int target){
-        if (high==low){
+        if (high<=low)
             return nums[low]==target;
-        }
+		int middle = low + (high - low)/2;
+		if (nums[middle]==target)
+			return true;
+		if (nums[middle]<target)
+			return binaryFind(nums,middle+1,high,target);
+		return binaryFind(nums,low,middle-1);
     }
-    public static int bitronicFind(int[] nums, int low, int high){
+    public static int bitronicFind(int[] nums, int target){
+		int low = 0;
+		int high = nums.length-1;
         int middle = bitronicMax(nums,low,high);
+		return binaryFind(nums,low,middle,target) || binaryFind(nums,middle,high,target);
     }
     public static int TwoSumFaster(int[] nums){
         int total = 0;

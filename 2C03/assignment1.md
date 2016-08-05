@@ -1,3 +1,7 @@
+2C03 - Assignment 1
+===
+Nathan Jervis
+
 1. 
 ===
 
@@ -61,7 +65,7 @@ Implementing two stacks with a deque is easy, each stack simply takes either the
 
 ```
 
-2
+2.
 ===
 
 `1.4.5`
@@ -151,5 +155,42 @@ The farthest pair is simply the minimum and the maximum value, so the following 
                 maximum = value;
         }
         System.out.format("%.3f, %.3f, distance = %.3f",minimum, maximum, maximum - minimum);
+    }
+```
+
+3.
+===
+
+`1.4.20`
+---
+Simply find the maximum point (`bitronicMax`, O(lg n)) and then do a binary search on either half (`binaryFind`, O(lg n)).
+
+
+```
+    public static int bitronicFind(int[] nums, int target){
+		int low = 0;
+		int high = nums.length-1;
+        int middle = bitronicMax(nums,low,high);
+		return binaryFind(nums,low,middle,target) || binaryFind(nums,middle,high,target);
+    }
+	public static int bitronicMax(int[] nums, int low, int high){
+        if (low==high)
+            return high;
+        int middle = low + (high - low)/2;
+        if (nums[middle] < nums[middle+1])
+            return max(nums,middle+1,high);
+        if (nums[middle]>nums[middle+1])
+            return max(nums,low,middle);
+        return middle;
+    }
+    public static boolean binaryFind(int[] nums, int low, int high, int target){
+        if (high<=low)
+            return nums[low]==target;
+		int middle = low + (high - low)/2;
+		if (nums[middle]==target)
+			return true;
+		if (nums[middle]<target)
+			return binaryFind(nums,middle+1,high,target);
+		return binaryFind(nums,low,middle-1);
     }
 ```
